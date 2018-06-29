@@ -1,0 +1,51 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+@import "nav";
+@import "bootstrap";
+@import "summernote-bs4";
+@import "summernote-custom-theme.min";
+@import "tbf";
+
+.nav-item a {
+	color: #141412;
+}
+
+.flex-container {
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+
+	.flex-item {
+		flex: 1;
+		max-width: 30%;
+		text-align: center;
+		border-radius: 5px;
+	}
+
+}
+
+.col-center {
+	margin: 0 auto;
+}
+
+.center {
+	float: none;
+	margin: 0 auto;
+	text-align: center;
+}
+
+th, td {
+	padding-top: .5em;
+	padding-right: 2em;
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Tbf</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+<body class="<%= controller.controller_name %>">
+<%= render 'layouts/header' %>
+<%= render 'layouts/nav' %>
+<% if notice %>
+  <p id="notice"><%= notice %></p>
+<% end -%>
+<div class="container-fluid">
+  <div class="row">
+    <% if current_page?(products_path) || current_page?(search_path) && user_signed_in? %>
+      <div id="side" class="col-md-2">
+        <%= render 'carts/cart', cart: @cart %>
+      </div>
+      <div class="col-md-10 col-center">
+        <%= yield %>
+      </div>
+    <% else %>
+      <div class="col-md-10 col-center">
+        <%= yield %>
+      </div>
+    <% end -%>
+  </div>
+</div>
+<%= render 'layouts/footer' %>
+
+</body>
+</html>
