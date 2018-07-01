@@ -9,9 +9,9 @@
             <p><%= product.description %></p>
             <p><%= product.category %></p>
             <span class="price"><%= number_to_currency(product.price) %></span>
-            <%= form_tag(line_items_path(product_id: product), remote: true) do %>
-              <%= label_tag 'quantity' %>
-              <%= select_tag 'quantity', options_for_select(1..15) %>
+            <%= form_tag(line_items_path(product_id: product.id), remote: true) do %>
+              <%= label_tag :quantity %>
+              <%= select_tag :quantity, options_for_select(1..15) %>
               <%= submit_tag 'Add to Cart', class: 'btn btn-light'%>
             <% end -%>
           </div>

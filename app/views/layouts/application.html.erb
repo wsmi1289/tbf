@@ -19,7 +19,7 @@
   <div class="row">
     <% if current_page?(products_path) || current_page?(search_path) && user_signed_in? %>
       <div id="side" class="col-md-2">
-        <%= render 'carts/cart', cart: @cart %>
+        <%= render @cart %>
       </div>
       <div class="col-md-10 col-center">
         <%= yield %>
