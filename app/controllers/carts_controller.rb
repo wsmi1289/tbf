@@ -2,18 +2,7 @@ class CartsController < ApplicationController
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
   before_action :client?
 
-  def index
-    @carts = Cart.all
-  end
-
   def show
-  end
-
-  def new
-    @cart = Cart.new
-  end
-
-  def edit
   end
 
   def create

@@ -3,11 +3,7 @@ class PostsController < ApplicationController
   before_action :searching?
 
   def index
-    if params.has_key?(:q)
-
-    else
-      @posts = Post.all
-    end
+    @posts = Post.all
   end
 
   def show

@@ -3,23 +3,8 @@ class LineItemsController < ApplicationController
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
   before_action :client?
 
-  def index
-    @line_items = LineItem.all
-  end
-
-  def show
-
-  end
-
   def checkout
     render 'checkout'
-  end
-
-  def new
-    @line_item = LineItem.new
-  end
-
-  def edit
   end
 
   def create
