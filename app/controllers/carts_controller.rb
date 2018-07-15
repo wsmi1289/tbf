@@ -1,7 +1,7 @@
 class CartsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:create, :update, :destroy], raise: false
+  # skip_before_action :authenticate_user!, only: [:create, :update, :destroy], raise: false
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
-
+  before_action :client?
   # GET /carts
   # GET /carts.json
   def index

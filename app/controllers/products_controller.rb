@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy, :toggle]
   before_action :set_cart
   before_action :searching?
-  before_action :user_is_client?
+  before_action :client?
 
   def index
     if current_user.try(:admin)
@@ -36,7 +36,7 @@ class ProductsController < ApplicationController
   def update
     respond_to do |format|
       if @product.update(product_params)
-        format.html { redirect_to @product, notice: 'Product was successfully updated.' }
+        format.html { redirect_to products_path, notice: 'Product was successfully updated.' }
         format.json { render :show, status: :ok, location: @product }
       else
         format.html { render :edit }
@@ -84,11 +84,5 @@ class ProductsController < ApplicationController
 
     def set_product
       @product = Product.find(params[:id])
-    end
-
-    def user_is_client?
-      unless current_user.try(:client) || current_user.try(:admin)
-        redirect_to two_barn_farm_path
-      end
     end
 end

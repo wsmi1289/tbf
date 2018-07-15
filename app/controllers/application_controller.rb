@@ -1,7 +1,19 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :set_cart
+
   private
+  
+    def admin?
+      unless current_user.try(:admin)
+        redirect_to two_barn_farm_path
+      end
+    end
+
+    def client?
+      unless current_user.try(:client) || current_user.try(:admin)
+        redirect_to two_barn_farm_path
+      end
+    end
 
     def set_cart 
         @cart = Cart.find(session[:cart_id])

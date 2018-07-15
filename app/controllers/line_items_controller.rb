@@ -1,8 +1,8 @@
 class LineItemsController < ApplicationController
   before_action :set_cart, only: [:create, :update]
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
-  skip_before_action :authenticate_user!, only: [:create], raise: false
-
+  # skip_before_action :authenticate_user!, only: [:create], raise: false
+  before_action :client?
   # GET /line_items
   # GET /line_items.json
   def index
@@ -33,7 +33,7 @@ class LineItemsController < ApplicationController
   def create
     product = Product.find(params[:product_id])
     quantity = params[:quantity].to_i
-    @line_item = @cart.add_product(product, quantity)
+    @line_item = @cart.add_product(product.id, quantity)
 
     respond_to do |format|
       if @line_item.save
@@ -41,7 +41,6 @@ class LineItemsController < ApplicationController
         format.js
         format.json { render :show, status: :created, location: @line_item }
       else
-        format.html { render :new }
         format.json { render json: @line_item.errors, status: :unprocessable_entity }
       end
     end

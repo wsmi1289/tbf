@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-  before_action :set_cart, :user_is_admin?
+  before_action :set_cart, :admin?
   def index
     @carts = Cart.all
     total = []
@@ -11,11 +11,4 @@ class AdminController < ApplicationController
     @total_sales = total.sum
     @users = User.all
   end
-  
-  private
-    def user_is_admin?
-      unless current_user.try(:admin)
-        redirect_to two_barn_farm_path
-      end
-    end
 end
