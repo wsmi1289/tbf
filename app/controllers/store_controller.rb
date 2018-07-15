@@ -23,10 +23,6 @@ class StoreController < ApplicationController
     render 'index'
   end
 
-  def in_stock
-
-  end
-
   private
 
     def searching?
@@ -34,9 +30,5 @@ class StoreController < ApplicationController
         @products = Product.search_products(params[:q]).order("created_at DESC")
         render "index"
       end
-    end
-
-    def toggle_active
-      update active: !active
     end
 end
