@@ -1,7 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy, :toggle]
   before_action :set_cart
-  # before_action :searching?
   before_action :client?
 
   def index
