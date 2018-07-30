@@ -75,10 +75,11 @@ class ProductsController < ApplicationController
       if params.has_key?(:q)
         if current_user.try(:admin)
           @products = Product.search_products(params[:q]).order("created_at DESC")
+          render "index"
         else
           @products = Product.where(in_stock: true).search_products(params[:q]).order("created_at DESC")
+          render "index"
         end
-        render "index"
       end
     end
 
