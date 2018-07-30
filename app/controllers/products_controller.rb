@@ -1,14 +1,22 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy, :toggle]
   before_action :set_cart
-  before_action :searching?
+  # before_action :searching?
   before_action :client?
 
   def index
-    if current_user.try(:admin)
-      @products = Product.all
+    if params.has_key?(:q)
+      if current_user.try(:admin)
+        @products = Product.search_products(params[:q]).order("created_at DESC")
+      else
+        @products = Product.where(in_stock: true).search_products(params[:q]).order("created_at DESC")
+      end
     else
-      @products = Product.where(in_stock: true)
+      if current_user.try(:admin)
+        @products = Product.all
+      else
+        @products = Product.where(in_stock: true)
+      end
     end
   end
 
@@ -71,17 +79,10 @@ class ProductsController < ApplicationController
       params.require(:product).permit(:title, :description, :category, :price, :image, :in_stock)
     end
 
-    def searching?
-      if params.has_key?(:q)
-        if current_user.try(:admin)
-          @products = Product.search_products(params[:q]).order("created_at DESC")
-          render "index"
-        else
-          @products = Product.where(in_stock: true).search_products(params[:q]).order("created_at DESC")
-          render "index"
-        end
-      end
-    end
+    # def searching?
+    #     render "index"
+    #   end
+    # end
 
     def set_product
       @product = Product.find(params[:id])
