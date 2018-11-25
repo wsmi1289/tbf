@@ -17,6 +17,7 @@ class ProductsController < ApplicationController
         @products = Product.where(in_stock: true)
       end
     end
+    @products
   end
 
   def new
