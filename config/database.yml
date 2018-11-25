@@ -62,11 +62,11 @@ test:
 #
 # You can use this database configuration with:
 #
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
+  production:
+    url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: tbf
-  username: tbf
-  password: Cholo00163561!
+# production:
+#   <<: *default
+#   database: tbf
+#   username: tbf
+#   password: Cholo00163561!
