@@ -72,10 +72,10 @@ Rails.application.configure do
 
     ActionMailer::Base.smtp_settings = {
       :address        => 'smtp.gmail.com',
-      :domain         => ENV.fetch['MAIL_DOMAIN'],
-      :port           => ENV.fetch['MAIL_PORT'],
-      :user_name      => ENV.fetch['MAIL_USER'],
-      :password       => ENV.fetch['MAIL_PASS'],
+      :domain         => ENV.fetch('MAIL_DOMAIN'),
+      :port           => ENV.fetch('MAIL_PORT'),
+      :user_name      => ENV.fetch('MAIL_USER'),
+      :password       => ENV.fetch('MAIL_PASS'),
       :authentication => :plain,
       :enable_starttls_auto => true
     }
