@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :categories
   resources :comments
   resources :posts
-  resource :checkout
+  resource :checkouts
   resources :users
   resources :line_items
   resources :carts

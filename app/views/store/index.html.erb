@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-md-8">
+    <h1>Listing Products</h1>
+  </div>
+  <div class="col-md-4">
+    <%= link_to 'Store', products_path, class: "btn btn-light mt-2" %>
+    <%= link_to "New Product", new_product_path, class: "btn btn-light mt-2" %>
+    <%= link_to 'Back', store_path, class: "btn btn-light mt-2" %>
+  </div>
+</div>
+<table>
+  <thead>
+    <th><%= sortable('title', "Name") %></th>
+    <th>
+      <%= select(:product, :filter, Product.pluck(:category), { include_blank: "Category" }, data: { remote: true, url: url_for(controller: 'store',
+                                                            action: 'filter')}) %>
+    </th>
+    <th><%= sortable('description', "Description") %></th>
+    <th><%= sortable('price', "Price") %></th>
+    <th><%= sortable('in_stock', "In Stock") %></th>
+    <th>Edit</th>
+  </thead>
+  <tbody class="product-table">    
+    <%= render 'product_row' %>
+  </tbody>
+</table>
+<div class="search_form">
+  <%= form_tag(store_path, method: "get") do %>
+    <%= label_tag(:q, "Search For:") %>
+    <%= text_field_tag (:q) %>
+    <%= submit_tag("Search", class: 'btn btn-light') %>
+  <% end -%>
+</div>
