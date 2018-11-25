@@ -5,15 +5,8 @@ class ProductsController < ApplicationController
 
   def index
     if params.has_key?(:q)
-      puts 'hasqhasqhasqhasqhasqhasq'
-      puts 'hasqhasqhasqhasqhasqhasq'
-      puts 'hasqhasqhasqhasqhasqhasq'
-      puts 'hasqhasqhasqhasqhasqhasq'
-      puts 'hasqhasqhasqhasqhasqhasq'
-      puts params[:q]
       if current_user.try(:admin)
         @products = Product.search_products(params[:q]).order("created_at DESC")
-        puts @products.to_json
       else
         @products = Product.where(in_stock: true).search_products(params[:q]).order("created_at DESC")
       end
