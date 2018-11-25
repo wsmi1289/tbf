@@ -11,7 +11,7 @@
   </div>
 </div>
 <div id="searched" class="flex-container">
-  <%= render 'products/product' products: @products%>
+  <%= render 'products/product', products: @products%>
 </div>
 <div class="search_form">
   <%= form_tag(products_path, method: "get") do %>
