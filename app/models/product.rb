@@ -1,11 +1,12 @@
 class Product < ActiveRecord::Base
   include PgSearch
-  pg_search_scope :search_products, against: {
-    title: 'A',
-    category: 'B',
-    description: 'C',
-    price: 'D'
-  }, using: { tsearch: { prefix: true } }
+  pg_search_scope :search_products, against: :title
+  # {
+  #   title: 'A',
+  #   category: 'B',
+  #   description: 'C',
+  #   price: 'D'
+  # }, using: { tsearch: { prefix: true } }
 
   mount_uploader :image, ImageUploader
   validates :image, presence: true
