@@ -11,27 +11,29 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, class: 'form-control form-control-lg' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <%= f.text_area :description, class: 'form-control form-control-lg' %>
   </div>
-  <div class="field">
-    <%= f.label :category %><br>
-    <%= f.collection_select :category, Category.all, :name, :name, prompt: true %>
-  </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :image, "Add an image" %><br>
-    <%= f.file_field :image %>
+    <%= f.file_field :image, class: 'form-control-file form-control-lg' %>
   </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
+  <div class="row">
+    <div class="form-group col">
+      <%= f.label :price %><br>
+      <%= f.text_field :price, class: 'form-control-file form-control-lg' %>
+    </div>
+    <div class="form-group col">
+      <%= f.label :category_id %><br>
+      <%= f.collection_select :category_id, Category.all, :name, :name, {prompt: true}, {class: 'form-control form-control-lg'} %>
+    </div>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Create Product", class: 'btn btn-light btn-lg btn-block'%>
   </div>
 <% end %>

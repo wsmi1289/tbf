@@ -1,13 +1,26 @@
-<ul>
-  <%= render (@cart.line_items) %>
-  <li>
-    Total: <%= number_to_currency(@cart.total_price) %>
-  </li>
-</ul>
-<div class="col-md-6 offset-md-3">
-  <%= label_tag :amount, "Total: "%>
-  <%= number_to_currency(@cart.total_price) %>
-</div>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Total</th>
+        <th>Quantity</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render (@cart.line_items) %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td>
+          Total: <%= number_to_currency(@cart.total_price) %>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tfoot>
+  </table>
 <%= form_tag('/checkouts') %>
   <div class="actions">
     <%= submit_tag "Submit", class: 'btn btn-light' %>
