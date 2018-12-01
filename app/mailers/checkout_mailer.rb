@@ -1,6 +1,7 @@
 class CheckoutMailer < ApplicationMailer
   def receipt_email
+    @orderer = params[:orderer] if params[:orderer].present?
     @cart = params[:cart]
-    mail(to: 'wsmi1289@gmail.com', subject: 'Order')
+    mail(to: params[:email], subject: 'Order')
   end
 end

@@ -10,7 +10,7 @@
   </head>
 
 <body class="<%= controller.controller_name %>">
-<%= render 'layouts/header' %>
+<%= render 'layouts/header', controller: controller.controller_name %>
 <%= render 'layouts/nav' %>
 <% if notice %>
   <p id="notice"><%= notice %></p>

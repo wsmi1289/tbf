@@ -11,11 +11,7 @@ class ProductsController < ApplicationController
         @products = Product.where(in_stock: true).search_products(params[:q]).order("created_at DESC")
       end
     else
-      if current_user.try(:admin)
-        @products = Product.all
-      else
-        @products = Product.where(in_stock: true)
-      end
+      @products = Product.where(in_stock: true)
     end
   end
 

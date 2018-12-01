@@ -14,6 +14,9 @@
     <% end %>
       <p>Total: <%= number_to_currency(@cart.total_price) %></p>
       <p>Please have cash or check ready on delivery</p>
+    <%- if @orderer.present? %>
+      <p>Ordered By: <%=@orderer%></p>
+    <% end -%>
     </ul>
   </body>
 </html>
