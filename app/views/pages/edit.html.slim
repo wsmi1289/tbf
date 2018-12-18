@@ -1,40 +1,27 @@
 h1 Edit
-- if @page.side_bars.any?
-	- if @page.side_bars.first.side
-		.row
-		  .col-md-8
-		    = render 'form'
-		  .col-md-4
-		    .card
-		      .card-header
-		        h3.center Sidebar
-		      .card-body
-		        .card-text
-		            a.btn.btn-light href='/side_bar_contents/new?sidebar=#{@page.side_bars.first.id}'
-		              | Add Content
-		      .card-footer
-	- else
-		.row
-		  .col-md-4
-		    .card
-		      .card-header
-		        h3.center Sidebar
-		      .card-body
-		        .card-text
-		            a.btn.btn-light href='/side_bar_contents/new?sidebar=#{@page.side_bars.first.id}'
-		              | Add Content
-		      .card-footer
-		  .col-md-8
-		    = render 'form'
-- else
+- if @page.right_sidebar?
 	.row
-	  .col-md-8
+	  .col-md-9
 	    = render 'form'
-	  .col-md-4
+	  .col-md-3
 	    .card
 	      .card-header
-	        h3.center Sidebar
-	      .card-body
-	        .card-text
-	          = render 'side_bars/form', side_bar: @side_bar
-	      .card-footer
+	      	.center
+      			a.btn.btn-light href="#{new_side_bar_content_path}" Add Content
+- elsif @page.left_sidebar?
+	.row
+	  .col-md-3
+	    .card
+	      .card-header
+	        .center
+      			a.btn.btn-light href="#{new_side_bar_content_path}" Add Content
+	  .col-md-9
+	    = render 'form'
+- elsif @page.bottom_sidebar?
+  = render 'form'
+  .card
+    .card-header
+    	.center
+      	a.btn.btn-light href="#{new_side_bar_content_path}" Add Content
+- else
+ 	= render 'form'

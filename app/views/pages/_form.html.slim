@@ -6,9 +6,11 @@
       ul
       - @page.errors.full_messages.each do |message|
         li= message
-  .form-check
-    = f.check_box(:nav_btn, { class: 'form-check-input' }, true, false)
-    = f.label :nav_btn, "Navigation Bar Button", class: 'form-check-label'
+  .row
+    .col
+      = render 'sidebar_form.html.slim', f: f
+    .col
+      = render 'link_position_form.html.slim', f: f
   .row
     .col
       .form-group

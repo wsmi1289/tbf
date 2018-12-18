@@ -13,7 +13,7 @@
         <%= link_to 'Blog', posts_path, class: 'nav-link' %>
       </li>
       <% Page.all.each do |page| %>
-        <% if page.nav_btn %>
+        <% if page.nav_link? %>
           <li class="nav-item">
             <a href="/tbf/<%=page.slug%>" class="nav-link"><%=page.name%></a>
           </li>
@@ -25,7 +25,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <% Page.all.each do |page| %>
-            <% unless page.nav_btn %>
+            <% if page.select_link? %>
               <a href="/tbf/<%=page.slug%>" class="dropdown-item"><%=page.name%></a>
             <% end -%>
           <% end -%>

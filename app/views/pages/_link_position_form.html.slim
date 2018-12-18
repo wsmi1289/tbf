@@ -1,0 +1,13 @@
+h4 Button Location
+.form-check.form-check-inline
+  = f.radio_button(:link_position, :hide_link, { class: 'form-check-input' }) 
+  = f.label :hide_link, "Hide", class: 'form-check-label'
+.form-check.form-check-inline
+  = f.radio_button(:link_position, :nav_link, { class: 'form-check-input' }) 
+  = f.label :nav_link, "Nav Bar", class: 'form-check-label'
+.form-check.form-check-inline
+  = f.radio_button(:link_position, :select_link, { class: 'form-check-input' }) 
+  = f.label :select_link, "Dropdown", class: 'form-check-label'
+.form-check.form-check-inline
+  = f.radio_button(:link_position, :bottom_link, { class: 'form-check-input' }) 
+  = f.label :bottom_link, "Footer", class: 'form-check-label'

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_18_052912) do
+ActiveRecord::Schema.define(version: 2018_12_18_061416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,8 +51,8 @@ ActiveRecord::Schema.define(version: 2018_12_18_052912) do
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "nav_select", default: true
-    t.boolean "nav_btn", default: false
+    t.integer "sidebar_status", default: 0
+    t.integer "link_position", default: 0
   end
 
   create_table "posts", force: :cascade do |t|
@@ -76,21 +76,13 @@ ActiveRecord::Schema.define(version: 2018_12_18_052912) do
   end
 
   create_table "side_bar_contents", force: :cascade do |t|
-    t.bigint "side_bar_id"
     t.text "content"
     t.json "image"
     t.text "link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["side_bar_id"], name: "index_side_bar_contents_on_side_bar_id"
-  end
-
-  create_table "side_bars", force: :cascade do |t|
     t.bigint "page_id"
-    t.boolean "side"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["page_id"], name: "index_side_bars_on_page_id"
+    t.index ["page_id"], name: "index_side_bar_contents_on_page_id"
   end
 
   create_table "users", force: :cascade do |t|
