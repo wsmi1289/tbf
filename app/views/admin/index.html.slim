@@ -1,0 +1,17 @@
+section#admin
+  .row
+    .col
+      h1 Welcome
+    .col
+      p Total Billable #{number_to_currency(@total_sales)}
+    .col
+      a.btn.btn-light href=new_page_path New Page
+  table
+    thead
+      tr
+        th Email
+        th Admin
+        th Client
+    tbody.user-table
+      - @users.each do |u|
+        = render 'user_row', user: u

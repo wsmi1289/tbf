@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  resources :side_bar_contents
+  resources :side_bars
   devise_for :users
-  get '/admin', to: 'admin#index'
+  # get '/admin', to: 'admin#index'
   get 'flower_smith', to: 'landings#flower_smith'
   get 'two_barn_farm', to: 'landings#two_barn_farm'
   get 'csa', to: 'landings#csa'
@@ -9,7 +11,9 @@ Rails.application.routes.draw do
   get '/store', to: 'store#index'
   get '/filter', to: 'store#filter'
   get '/sort', to: 'store#sort'
-
+  
+  resources :users, only: [:update]
+  resources :admin, only: [:index, :create]
   resources :categories
   resources :comments
   resources :posts
@@ -17,7 +21,7 @@ Rails.application.routes.draw do
   resources :users
   resources :line_items
   resources :carts
-
+  resources :pages, path: :tbf
   resources :products do
     get :who_bought, on: :member
     post 'toggle', on: :member

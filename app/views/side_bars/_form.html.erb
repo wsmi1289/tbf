@@ -1,0 +1,26 @@
+<label>Right</label> 
+<%= radio_button_tag('side', 'right', @side_bar.side, 
+                  data: {
+                          remote: true,
+                          url: url_for(
+                            controller: 'side_bars',
+                            action: 'create',
+                            side_bar: {
+                              page_id: @page.id,
+                              side: true
+                            }),
+                          method: "POST"
+                        }) %>
+<label>Left</label> 
+<%= radio_button_tag('side', 'left', @side_bar.side, 
+                  data: {
+                          remote: true,
+                          url: url_for(
+                            controller: 'side_bars',
+                            action: 'create',
+                            side_bar: {
+                              page_id: @page.id,
+                              side: false
+                            }),
+                          method: "POST"
+                        }) %>

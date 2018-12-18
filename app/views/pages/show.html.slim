@@ -1,0 +1,24 @@
+- if @sidebar
+	- if @sidebar.try(:side)
+		.row
+			.col-md-8
+				= sanitize(@page.content)
+			.col-md-4
+				.card
+					.card-body
+					  .card-text
+					    = sanitize(@sidebar.side_bar_contents.last.content)
+					    a.btn.btn-link.btn-light href="#{@sidebar.side_bar_contents.last.link}" here
+	- else
+		.row
+			.col-md-4
+				.card
+					.card-body
+							= @sidebar.side_bar_contents.first.content
+					.card-footer
+			.col-md-8
+				= sanitize(@page.content)
+- else
+	= sanitize(@page.content)
+- if current_user.admin?
+  a.btn.btn-light href=edit_page_path(@page.slug) Edit Page

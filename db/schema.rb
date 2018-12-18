@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_26_011452) do
+ActiveRecord::Schema.define(version: 2018_12_15_212947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,16 @@ ActiveRecord::Schema.define(version: 2018_11_26_011452) do
     t.index ["product_id"], name: "index_line_items_on_product_id"
   end
 
+  create_table "pages", force: :cascade do |t|
+    t.text "slug", null: false
+    t.text "name", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "nav_select", default: true
+    t.boolean "nav_btn", default: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -66,6 +76,24 @@ ActiveRecord::Schema.define(version: 2018_11_26_011452) do
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
+  create_table "side_bar_contents", force: :cascade do |t|
+    t.bigint "side_bar_id"
+    t.text "content"
+    t.json "image"
+    t.text "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["side_bar_id"], name: "index_side_bar_contents_on_side_bar_id"
+  end
+
+  create_table "side_bars", force: :cascade do |t|
+    t.bigint "page_id"
+    t.boolean "side"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["page_id"], name: "index_side_bars_on_page_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -81,6 +109,7 @@ ActiveRecord::Schema.define(version: 2018_11_26_011452) do
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false
     t.boolean "client", default: false
+    t.json "image"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

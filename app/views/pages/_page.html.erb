@@ -1,0 +1,8 @@
+<tr>
+  <td><%= page.slug%></td>
+  <td><%= page.name %></td>
+  <td><%= link_to "View Page", page_path(page.slug), class: 'btn btn-light' %></td>
+  <td>
+    <%= link_to "Edit Page", edit_page_path(page.slug), class: 'btn btn-light' %>
+  </td>
+</tr>

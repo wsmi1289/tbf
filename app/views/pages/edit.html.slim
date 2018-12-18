@@ -1,0 +1,40 @@
+h1 Edit
+- if @page.side_bars.any?
+	- if @page.side_bars.first.side
+		.row
+		  .col-md-8
+		    = render 'form'
+		  .col-md-4
+		    .card
+		      .card-header
+		        h3.center Sidebar
+		      .card-body
+		        .card-text
+		            a.btn.btn-light href='/side_bar_contents/new?sidebar=#{@page.side_bars.first.id}'
+		              | Add Content
+		      .card-footer
+	- else
+		.row
+		  .col-md-4
+		    .card
+		      .card-header
+		        h3.center Sidebar
+		      .card-body
+		        .card-text
+		            a.btn.btn-light href='/side_bar_contents/new?sidebar=#{@page.side_bars.first.id}'
+		              | Add Content
+		      .card-footer
+		  .col-md-8
+		    = render 'form'
+- else
+	.row
+	  .col-md-8
+	    = render 'form'
+	  .col-md-4
+	    .card
+	      .card-header
+	        h3.center Sidebar
+	      .card-body
+	        .card-text
+	          = render 'side_bars/form', side_bar: @side_bar
+	      .card-footer

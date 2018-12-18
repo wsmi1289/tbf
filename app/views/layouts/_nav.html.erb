@@ -12,22 +12,34 @@
       <li class="nav-item">
         <%= link_to 'Blog', posts_path, class: 'nav-link' %>
       </li>
+      <% Page.all.each do |page| %>
+        <% if page.nav_btn %>
+          <li class="nav-item">
+            <a href="/tbf/<%=page.slug%>" class="nav-link"><%=page.name%></a>
+          </li>
+        <% end -%>
+      <% end -%>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Menu
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <% Page.all.each do |page| %>
+            <% unless page.nav_btn %>
+              <a href="/tbf/<%=page.slug%>" class="dropdown-item"><%=page.name%></a>
+            <% end -%>
+          <% end -%>
           <%= link_to 'The CSA', csa_url, class: 'dropdown-item' %>
           <%= link_to 'The Plants', plants_url, class: 'dropdown-item' %>
           <%= link_to 'The Farmers', farmers_url, class: 'dropdown-item' %>
           <div class="dropdown-divider"></div>
             <% if user_signed_in? %>
-              <%= link_to 'Account', edit_user_registration_path(current_user), class: 'dropdown-item' %>
+              <%= link_to 'Account', user_path(current_user), class: 'dropdown-item' %>
               <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
               <% if current_user.try(:admin?) %>
                 <%= link_to 'Categories', categories_path, class: 'dropdown-item' %>
                 <%= link_to 'Products', products_path, class: 'dropdown-item' %>
-                <%= link_to 'Admin', admin_path, class: 'dropdown-item' %>
+                <%= link_to 'Admin', admin_index_path, class: 'dropdown-item' %>
               <% end -%>
               <% if current_user.try(:client?) %>
                 <%= link_to 'Products', products_path, class: 'dropdown-item' %>
@@ -46,5 +58,8 @@
       <% end -%>
      
     </form>
+    <% if user_signed_in? %>
+      <%= image_tag(current_user.image_url(:thumb)) %>
+    <% end -%>
   </div>
 </nav>

@@ -1,0 +1,26 @@
+= form_for(@page) do |f|
+  - if @page.errors.any?
+    div#error_explanation
+      h2 #{pluralize(@page.errors.count, "error")} prohibited this page from being saved:
+
+      ul
+      - @page.errors.full_messages.each do |message|
+        li= message
+  .form-check
+    = f.check_box(:nav_btn, { class: 'form-check-input' }, true, false)
+    = f.label :nav_btn, "Navigation Bar Button", class: 'form-check-label'
+  .row
+    .col
+      .form-group
+        = f.label :slug 
+        = f.text_field :slug, class: 'form-control form-control-lg'
+    .col
+      .form-group
+        = f.label :name 
+        = f.text_field :name, class: 'form-control form-control-lg'
+  .form-group
+    = f.label :content 
+    = f.text_area :content, 'data-provider': :summernote, class: 'form-control form-control-lg'
+
+  .actions.mt-3
+    = f.submit "Create", class: 'btn btn-light btn-lg btn-block'

@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'plants', to: 'landings#plants'
   get 'store/index'
 
+  resources :admin, only: [:index, :create]
   resources :comments
   resources :posts
   resource :checkout

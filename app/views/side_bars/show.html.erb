@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<%= link_to 'Edit', edit_side_bar_path(@side_bar) %> |
+<%= link_to 'Back', side_bars_path %>
+<%= form_with(model: side_bar, local: true) do |form| %>
+  <% if side_bar.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(side_bar.errors.count, "error") %> prohibited this side_bar from being saved:</h2>
+
+      <ul>
+      <% side_bar.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= form.check_box_field :side, value: @page.id, class: 'form-control form-control-lg' %>
+
+  <div class="actions">
+    <%= form.submit 'Create', class: 'btn btn-light' %>
+  </div>
+<% end %>
