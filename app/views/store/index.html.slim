@@ -1,0 +1,23 @@
+.row
+  .col-md-8
+    h1 Listing Products
+  .col-md-4
+    = link_to 'Store', products_path, class: "btn btn-light mt-2"
+    = link_to "New Product", new_product_path, class: "btn btn-light mt-2"
+    = link_to 'Back', store_path, class: "btn btn-light mt-2"
+table 
+  thead 
+    th = sortable('title', "Name")
+    th 
+      = select(:product, :filter, Category.all.collect { |c| [c.name, c.id] }, { include_blank: "Category" }, data: { remote: true, url: url_for(controller: 'store', action: 'filter')})
+    th = sortable('description', "Description")
+    th = sortable('price', "Price")
+    th = sortable('in_stock', "In Stock")
+    th Edit
+  tbody.product-table
+    = render 'product_row'
+.search_form
+  = form_tag(store_path, method: "get") do
+    = label_tag(:q, "Search For:")
+    = text_field_tag (:q)
+    = submit_tag("Search", class: 'btn btn-light')

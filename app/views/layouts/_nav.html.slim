@@ -1,0 +1,40 @@
+nav.navbar.navbar-expand-lg.mb-3.tan
+	= link_to 'Two Barn Farm', two_barn_farm_url, class: 'navbar-brand'
+	button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+		span.navbar-toggler-icon
+	.collapse.navbar-collapse#navbarSupportedContent
+		ul.navbar-nav.mr-auto
+			li.nav-item
+				= link_to 'The Flower Smith', flower_smith_url, class: 'nav-link'
+			li.nav-item
+				= link_to 'Blog', posts_path, class: 'nav-link'
+			- Page.all.each do |page|
+				- if page.nav_link?
+					li.nav-item
+						a.nav-link href="/tbf/#{page.slug}"
+							= page.name
+			li.nav-item.dropdown
+				a#navbarDropdown.nav-link.dropdown-toggle href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+					| Menu
+		      	.dropdown-menu aria-labelledby="navbarDropdown"
+			        - Page.all.each do |page|
+								- if page.select_link?
+									a.dropdown-item href="/tbf/#{page.slug}" = page.name
+								a.dropdown-item href=csa_url The CSA
+								a.dropdown-item href=plants_url The Plants
+								a.dropdown-item href=farmers_url The Farmers
+								.dropdown-divider
+								- if user_signed_in?
+									- if current_user.try(:admin?)
+										a.dropdown-item href=admin_index_path Admin
+									- if current_user.try(:client?) || current_user.try(:admin?)
+										a.dropdown-item href=products_path Products
+									a.dropdown-item href=user_path(current_user) Account
+									= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'dropdown-item'
+								- else
+									a.dropdown-item href=new_user_registration_path Sign Up
+									a.dropdown-item href=new_user_session_path Login
+		form.form-inline.my-2.my-lg-0
+			= form_tag('/search', method: "get") do
+				= text_field_tag :q, '', class: 'form-control mr-sm-2'
+				= submit_tag("Search", class: 'btn btn-outline-success my-2 my-sm-0')

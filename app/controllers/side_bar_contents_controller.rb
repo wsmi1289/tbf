@@ -71,6 +71,6 @@ class SideBarContentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def side_bar_content_params
-      params.require(:side_bar_content).permit(:content, :image, :link, :side_bar_id)
+      params.require(:side_bar_content).permit(:content, :image, :link, :page_id, :title)
     end
 end

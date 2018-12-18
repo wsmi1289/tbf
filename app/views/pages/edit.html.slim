@@ -1,27 +1,18 @@
 h1 Edit
 - if @page.right_sidebar?
 	.row
-	  .col-md-9
+	  .col-md-8
 	    = render 'form'
-	  .col-md-3
-	    .card
-	      .card-header
-	      	.center
-      			a.btn.btn-light href="#{new_side_bar_content_path}" Add Content
+	  .col-md-4
+	  	= render 'pages/sidebar'
 - elsif @page.left_sidebar?
 	.row
-	  .col-md-3
-	    .card
-	      .card-header
-	        .center
-      			a.btn.btn-light href="#{new_side_bar_content_path}" Add Content
-	  .col-md-9
+	  .col-md-8
+	  	= render 'pages/sidebar'
+	  .col-md-4
 	    = render 'form'
 - elsif @page.bottom_sidebar?
   = render 'form'
-  .card
-    .card-header
-    	.center
-      	a.btn.btn-light href="#{new_side_bar_content_path}" Add Content
+  = render 'pages/sidebar'
 - else
  	= render 'form'

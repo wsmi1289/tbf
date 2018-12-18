@@ -1,29 +1,18 @@
 - if @page.right_sidebar?
 	.row
-	  .col-md-9
-	    = sanitize(@page.content)
-	  .col-md-3
-	    .card
-	      .card-header
-	        .center
-      			a.btn.btn-light href="#{new_side_bar_content_path}" Add Content
-
+		.col-md-8
+  			= sanitize(@page.content)
+		.col-md-4
+			= render 'pages/sidebar', page: @page
 - elsif @page.left_sidebar?
 	.row
-	  .col-md-3
-	    .card
-	      .card-header
-	        .center
-      			a.btn.btn-light href="#{new_side_bar_content_path}" Add Content
-	  .col-md-9
-	    = sanitize(@page.content)
+		.col-md-4
+			= render 'pages/sidebar', page: @page
+		.col-md-8
+  			= sanitize(@page.content)
 - elsif @page.bottom_sidebar?
-  = sanitize(@page.content)
-  .card
-    .card-header
-	    .center
-      	a.btn.btn-light href="#{new_side_bar_content_path}" Add Content
- 
+	= sanitize(@page.content)
+	= render 'pages/sidebar', page: @page
 - else
  = sanitize(@page.content)
 - if current_user.admin?

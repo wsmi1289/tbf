@@ -1,0 +1,10 @@
+.card.mt-5
+  .card-header
+    = image_tag(post.image_url(:header), class: "card-img-top")
+    h2.text-center = post.title
+  .card-body
+    p.card-text
+      = truncate(strip_tags(post.body), length: 250)
+  .card-footer
+    .center
+      = link_to "Full Post", post, class: 'btn btn-light'

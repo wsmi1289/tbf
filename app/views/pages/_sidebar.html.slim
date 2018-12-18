@@ -1,0 +1,7 @@
+.card
+  - if current_user.try(:admin)
+  	.card-header
+    	.center
+				a.btn.btn-light href=new_side_bar_content_path({page_id: @page.id}) Add Content
+- @page.side_bar_contents.each do |content|
+	= render 'side_bar_contents/content', this: content
