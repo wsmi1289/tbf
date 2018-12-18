@@ -8,7 +8,6 @@ class StoreController < ApplicationController
   def filter
     if params.has_key?(:product)
       filter = params[:product][:filter]
-      puts filter
       @products = Product.where(category: filter)
       respond_to do |format|
         format.js

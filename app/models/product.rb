@@ -1,16 +1,18 @@
 class Product < ActiveRecord::Base
   include PgSearch
-  pg_search_scope :search_products, against: {
+  pg_search_scope :search_products, associated_against: {
+    category: [:name] }, against: {
     title: 'A',
-    category: 'B',
-    description: 'C',
-    price: 'D'
+    description: 'B',
+    price: 'C'
   }, using: { tsearch: { prefix: true } }
 
   mount_uploader :image, ImageUploader
   validates :image, presence: true
   
   has_many :line_items, dependent: :destroy
+  belongs_to :category
+
   before_destroy :ensure_not_referenced_by_any_line_item
 
   validates :title, :description, presence: true

@@ -10,6 +10,11 @@ class ProductsController < ApplicationController
       else
         @products = Product.where(in_stock: true).search_products(params[:q]).order("created_at DESC")
       end
+    elsif params.has_key?(:filter)
+      @products = Product.where(category_id: params[:filter][:category])
+      respond_to do |format|
+        format.js
+      end
     else
       @products = Product.where(in_stock: true)
     end
@@ -71,7 +76,7 @@ class ProductsController < ApplicationController
   private
 
     def product_params
-      params.require(:product).permit(:title, :description, :category, :price, :image, :in_stock)
+      params.require(:product).permit(:title, :description, :category_id, :price, :image, :in_stock)
     end
 
     # def searching?

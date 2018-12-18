@@ -12,7 +12,7 @@
   <thead>
     <th><%= sortable('title', "Name") %></th>
     <th>
-      <%= select(:product, :filter, Product.pluck(:category), { include_blank: "Category" }, data: { remote: true, url: url_for(controller: 'store',
+      <%= select(:product, :filter, Category.all.collect { |c| [c.name, c.id] }, { include_blank: "Category" }, data: { remote: true, url: url_for(controller: 'store',
                                                             action: 'filter')}) %>
     </th>
     <th><%= sortable('description', "Description") %></th>

@@ -1,0 +1,18 @@
+.row
+  .col-md-4
+    h1 Store
+  .col-md-4
+    = select(:filter, :category, Category.all.collect { |c| [c.name, c.id] }, { include_blank: "Category" }, data: { remote: true, url: url_for(controller: 'products', action: 'index')}, class: 'form-control')
+  .col-md-4
+    - if current_user.try(:admin)
+      = link_to "New Product", new_product_path, class: "btn btn-light mt-2"
+      = link_to "Product List", store_path, class: "btn btn-light mt-2"
+    - else
+      = link_to 'Back', products_path, class: "btn btn-light mt-2"
+#searched.flex-container
+  = render 'products/product', products: @products
+.search-form
+  = form_tag(products_path, method: "get") do
+    = label_tag(:q, "Search For:")
+    = text_field_tag (:q)
+    = submit_tag("Search", class: 'btn btn-light')
