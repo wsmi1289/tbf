@@ -1,14 +1,11 @@
 class AdminController < ApplicationController
   before_action :set_cart, :admin?
   def index
-    @carts = Cart.all
-    total = []
-    @carts.each do |c|
-      c.line_items.each do |l|
-        total<<l.total_price.to_f
-      end
-    end
-    @total_sales = total.sum
+    @orders = Order.all
+    @total_sales = total_sales
+  end
+
+  def users
     @users = User.all
   end
 
@@ -24,5 +21,17 @@ class AdminController < ApplicationController
         format.json { render json: @product.errors, status: :unprocessable_entity }
       end
     end
+  end
+
+  private
+
+  def total_sales
+    total = []
+    @orders.each do |o|
+      o.cart.line_items.each do |l|
+        total<<l.total_price.to_f
+      end
+    end
+    total.sum
   end
 end

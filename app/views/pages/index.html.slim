@@ -3,12 +3,12 @@ table.table.table-striped
     tr
       th Slug
       th Name
-      th
+      th View
+      th Edit
   tbody
     - @pages.each do |page|
       = render 'pages/page', page: page
   tfoot
     tr
       td
-        - if current_user.try(:admin?)
-          = link_to 'New Page', new_page_path, class: 'btn btn-lg btn-light'
+        = link_to 'New Page', new_page_path, class: 'btn btn-lg btn-light'

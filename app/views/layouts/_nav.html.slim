@@ -20,9 +20,6 @@ nav.navbar.navbar-expand-lg.mb-3.tan
 			        - Page.all.each do |page|
 								- if page.select_link?
 									a.dropdown-item href="/tbf/#{page.slug}" = page.name
-								a.dropdown-item href=csa_url The CSA
-								a.dropdown-item href=plants_url The Plants
-								a.dropdown-item href=farmers_url The Farmers
 								.dropdown-divider
 								- if user_signed_in?
 									- if current_user.try(:admin?)
@@ -36,5 +33,5 @@ nav.navbar.navbar-expand-lg.mb-3.tan
 									a.dropdown-item href=new_user_session_path Login
 		form.form-inline.my-2.my-lg-0
 			= form_tag('/search', method: "get") do
-				= text_field_tag :q, '', class: 'form-control mr-sm-2'
+				= text_field_tag :q, '', placeholder: 'Search', class: 'form-control mr-sm-2'
 				= submit_tag("Search", class: 'btn btn-outline-success my-2 my-sm-0')

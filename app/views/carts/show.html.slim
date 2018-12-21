@@ -1,0 +1,17 @@
+.receipt.col-md-9.col-center
+  h1.center.mt-3.mb-3 Your Order
+  table.table.table-striped
+    thead
+      tr
+        th Product
+        th Total
+        th Quantity
+        th
+    tbody
+      = render @cart.line_items, btns: true
+    tfoot
+      tr
+        td
+          Total:= number_to_currency(@cart.total_price)
+- unless params[:view_only]
+  = link_to 'Checkout', new_checkouts_path, class: 'btn btn-light'

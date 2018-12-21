@@ -5,15 +5,6 @@ class LandingsController < ApplicationController
 
   def two_barn_farm
   end
-
-  def csa
-  end
-
-  def farmers
-  end
-
-  def plants
-  end
   private
 
     def searching?

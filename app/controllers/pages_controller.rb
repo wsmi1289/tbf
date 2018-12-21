@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  before_action :admin?, except: [:show]
   before_action :set_page, only: [:show, :edit, :update, :destroy]
   def index
     @pages = Page.all

@@ -8,9 +8,9 @@ h1 Edit
 - elsif @page.left_sidebar?
 	.row
 	  .col-md-8
-	  	= render 'pages/sidebar'
+	  	= render 'form'
 	  .col-md-4
-	    = render 'form'
+	  	= render 'pages/sidebar'
 - elsif @page.bottom_sidebar?
   = render 'form'
   = render 'pages/sidebar'

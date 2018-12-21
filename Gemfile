@@ -19,6 +19,7 @@ gem 'mini_magick', '~> 4.8'
 gem 'pg_search'
 gem 'jquery-rails'
 gem 'slim'
+gem 'fog-aws'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -18,17 +18,13 @@
 <div class="container-fluid">
   <div class="row">
     <% if current_page?(products_path) && user_signed_in? %>
-      <div id="side" class="col-md-2">
+      <div id="side" class="col-md-3">
         <%= render @cart %>
       </div>
-      <div class="col-md-10 col-center">
-        <%= yield %>
-      </div>
-    <% else %>
-      <div class="col-md-10 col-center">
-        <%= yield %>
-      </div>
-    <% end -%>
+    <% end %>
+    <div class="col-md-9 col-center">
+      <%= yield %>
+    </div>
   </div>
 </div>
 <%= render 'layouts/footer' %>

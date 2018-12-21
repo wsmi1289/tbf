@@ -1,0 +1,6 @@
+aside.container
+	h2 Your Cart
+	= render 'misc/line_items', cart: @cart
+	.btn-group.mt-3.mx-3
+	  = button_to 'Empty Cart', @cart, method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-light mr-3'
+	  = link_to 'View Cart', cart_path(@cart), class: 'btn btn-light'
