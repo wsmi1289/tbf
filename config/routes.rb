@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :side_bar_contents
-  # resources :side_bars
   devise_for :users
   get 'flower_smith', to: 'landings#flower_smith'
   get 'two_barn_farm', to: 'landings#two_barn_farm'

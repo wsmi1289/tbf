@@ -25,7 +25,7 @@ section#admin
             td
               = button_to 'Destroy', order.cart, method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-light'
             td
-              = link_to 'View Cart', cart_path(order.cart, {view_only: true}), class: 'btn btn-light'
+              = link_to 'View Cart', cart_path(order.cart, view_only: true), class: 'btn btn-light'
       tfoot
         tr
           td.right-align Total Billable #{number_to_currency(@total_sales)}

@@ -15,5 +15,5 @@
 	= render 'pages/sidebar', page: @page
 - else
  = sanitize(@page.content)
-- if current_user.admin?
+- if current_user.try(:admin)
   a.btn.btn-light href=edit_page_path(@page.slug) Edit Page
