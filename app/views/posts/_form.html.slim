@@ -11,7 +11,7 @@
   .form-group
     = f.label :image, "Add an Image"
     = f.file_field :image, class: 'form-control-file form-control-lg'
-
+  = render 'posts/title_form', f: f
   .form-group
     = f.label :title
     = f.text_field :title, class: 'form-control form-control-lg'

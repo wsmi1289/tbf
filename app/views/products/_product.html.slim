@@ -1,16 +1,19 @@
 - products.each do |product|
-  .card.flex style="width: 18rem;"
+  .card.flex.mb-3 style="width: 18rem;"
     = image_tag(product.image_url(:thumb), class: "card-img-top")
     .card-body
-      h4.card-title = product.title
-      .card-text
-        p Category: #{product.category.try(:name)}
+      .d-flex.justify-content-around
+        h4.p2 = product.title
+        h6.text-muted.mt-2.p2 = product.category.try(:name)
+      .card-text.center
         p = product.description
-        span.price = number_to_currency(product.price)
-        = form_tag(line_items_path(product_id: product.id), remote: true) do
-          label.mr-3 Quantity
-          = select_tag :quantity, options_for_select(1..15)
-          = submit_tag 'Add to Cart', class: 'btn btn-light ml-3'
+        h6.mb-2 = number_to_currency(product.price)
+        .mx-3
+          = form_tag(line_items_path(product_id: product.id), remote: true) do
+            .input-group
+              = number_field_tag :quantity, {}, placeholder: "Quantity", class: "form-control"
+              .input-group-append
+                = submit_tag 'Add to cart', class: 'btn btn-outline-secondary'
     - if current_user.try(:admin)
       .card-footer.text-center
         = link_to 'Delete', product, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-light' 
