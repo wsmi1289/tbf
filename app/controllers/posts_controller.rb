@@ -19,39 +19,27 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
 
-    # respond_to do |format|
-      if @post.save
-        if params[:post][:image].present?
-          render :crop
-        else
-          redirect_to @post
-        end
-        # format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        # format.json { render :show, status: :created, location: @post }
+    if @post.save
+      if post_params[:image].present?
+        render :crop
       else
-        render :new
-        # format.html { render :new }
-        # format.json { render json: @post.errors, status: :unprocessable_entity }
+        redirect_to @post
       end
-    # end
+    else
+      render :new
+    end
   end
 
   def update
-    # respond_to do |format|
-      if @post.update(post_params)
-        if params[:post][:image].present?
-          render :crop
-        else
-          redirect_to @post
-        end
-        # format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        # format.json { render :show, status: :ok, location: @post }
+    if @post.update(post_params)
+      if post_params[:image].present?
+        render :crop
       else
-        render :edit
-        # format.html { render :edit }
-        # format.json { render json: @post.errors, status: :unprocessable_entity }
+        redirect_to @post
       end
-    # end
+    else
+      render :edit
+    end
   end
 
   def destroy

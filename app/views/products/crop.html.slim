@@ -2,12 +2,12 @@
 	h1 Crop Image
 	.row
 		.col-md-8
-			= image_tag(@product.image_url(:large), id: 'cropbox')
+			= image_tag(@product.image_url(:large), id: 'product-cropbox')
 		.col-md-4
 			h4 Preview
 			.prev-prod
-				= image_tag @product.image_url(:large), :id => "preview"
-	.center.mt-5
+				= image_tag @product.image_url(:large), id: "product-preview"
+	.center.mt-3
 		= form_for @product do |f|
 			- %w[x y w h].each do |attr|
 				= f.hidden_field "crop_#{attr}", as: :hidden
@@ -16,10 +16,9 @@
 
 javascript:
 	$(function () {
-		var width = parseInt($('#cropbox').width())-100;
-		var height = parseInt($('#cropbox').height())-100;
-		$('#cropbox').Jcrop({
-			addClass: 'jcrop-centered',
+		var width = parseInt($('#product-cropbox').width())-100;
+		var height = parseInt($('#product-cropbox').height())-100;
+		$('#product-cropbox').Jcrop({
 			aspectRatio: 1,
 			setSelect: [50, 50, width, height],
 			onChange: updatePreview,
@@ -36,9 +35,9 @@ javascript:
 		function showPreview (coords) {
 			var rx = 200 / coords.w;
 			var ry = 200 / coords.h;
-			$('#preview').css({
-				width: Math.round(rx * $('#cropbox').width()) + 'px',
-				height: Math.round(ry * $('#cropbox').height()) + 'px',
+			$('#product-preview').css({
+				width: Math.round(rx * $('#product-cropbox').width()) + 'px',
+				height: Math.round(ry * $('#product-cropbox').height()) + 'px',
 				marginLeft: '-' + Math.round(rx * coords.x) + 'px',
 				marginTop: '-' + Math.round(ry * coords.y) + 'px'
 			});
