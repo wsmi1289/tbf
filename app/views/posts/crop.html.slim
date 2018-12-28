@@ -1,0 +1,50 @@
+.container
+	h1 Crop Image
+	.row
+		.col-md-10.offset-md-1
+			h4.center Preview
+			.prev-header
+				= image_tag @post.image_url(:large), id: "preview"
+	.row.mt-2
+		.col-md-8.offset-md-2
+			= image_tag(@post.image_url(:large), id: 'cropbox')
+	.center.mt-5
+		= form_for @post do |f|
+			- %w[x y w h].each do |attr|
+				= f.hidden_field "crop_#{attr}", as: :hidden
+			.actions
+				= f.submit "Crop", class: 'btn btn-light btn-lg btn-block'
+
+javascript:
+	$(function () {
+		var width = parseInt($('#cropbox').width());
+		var height = parseInt($('#cropbox').height());
+		$('#cropbox').Jcrop({
+			addClass: 'jcrop-centered',
+			aspectRatio: 4,
+			setSelect: [0, 0, width, height],
+			onChange: updatePreview,
+			onSelect: updatePreview,
+		});
+
+		function updatePreview (coords) {
+			$('#post_crop_x').val(coords.x);
+		    $('#post_crop_y').val(coords.y);
+		    $('#post_crop_w').val(coords.w);
+		    $('#post_crop_h').val(coords.h);
+		    showPreview(coords);
+		}
+
+		function showPreview (coords) {
+			var rx = 800 / coords.w;
+			var ry = 200 / coords.h;
+			$('#preview').css({
+				width: Math.round(rx * $('#cropbox').width()) + 'px',
+				height: Math.round(ry * $('#cropbox').height()) + 'px',
+				marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+				marginTop: '-' + Math.round(ry * coords.y) + 'px'
+			});
+		}
+
+		// Jcrop.attach('cropbox');
+	});
