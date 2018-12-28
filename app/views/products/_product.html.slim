@@ -7,7 +7,7 @@
         h6.text-muted.mt-2.p2 = product.category.try(:name)
       .card-text.center
         p = product.description
-        h6.card-subtitle.mb-2 = number_to_currency(product.price)
+        h6.mb-2 = number_to_currency(product.price)
         .mx-3
           = form_tag(line_items_path(product_id: product.id), remote: true) do
             .input-group

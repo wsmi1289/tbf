@@ -53,7 +53,7 @@ class PostsController < ApplicationController
   private
 
     def post_params
-      params.require(:post).permit(:title, :body, :image, :crop_x, :crop_y, :crop_w, :crop_h)
+      params.require(:post).permit(:title, :body, :image, :crop_x, :crop_y, :crop_w, :crop_h, :title_position)
     end
     
     def searching?
