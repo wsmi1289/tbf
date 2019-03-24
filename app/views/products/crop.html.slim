@@ -16,8 +16,8 @@
 
 javascript:
 	$(function () {
-		var width = parseInt($('#product-cropbox').width())-100;
-		var height = parseInt($('#product-cropbox').height())-100;
+		var width = parseInt(__('#product-cropbox').width())-100;
+		var height = parseInt(__('#product-cropbox').height())-100;
 		$('#product-cropbox').Jcrop({
 			aspectRatio: 1,
 			setSelect: [50, 50, width, height],
@@ -25,21 +25,24 @@ javascript:
 			onSelect: updatePreview,
 		});
 		function updatePreview (coords) {
-			$('#product_crop_x').val(coords.x);
-		    $('#product_crop_y').val(coords.y);
-		    $('#product_crop_w').val(coords.w);
-		    $('#product_crop_h').val(coords.h);
-		    showPreview(coords);
+			__('#product_crop_x').val(coords.x);
+	    __('#product_crop_y').val(coords.y);
+	    __('#product_crop_w').val(coords.w);
+	    __('#product_crop_h').val(coords.h);
+	    showPreview(coords);
 		}
 
 		function showPreview (coords) {
 			var rx = 200 / coords.w;
 			var ry = 200 / coords.h;
-			$('#product-preview').css({
-				width: Math.round(rx * $('#product-cropbox').width()) + 'px',
-				height: Math.round(ry * $('#product-cropbox').height()) + 'px',
-				marginLeft: '-' + Math.round(rx * coords.x) + 'px',
-				marginTop: '-' + Math.round(ry * coords.y) + 'px'
+			var w = __('#product-cropbox').width();
+			var h = __('#product-cropbox').height();
+
+			__('#product-preview').css({
+				width: Math.round(rx * w) + 'px',
+				height: Math.round(ry * h) + 'px',
+				margin_left: '-' + Math.round(rx * coords.x) + 'px',
+				margin_top: '-' + Math.round(ry * coords.y) + 'px'
 			});
 		}
 
