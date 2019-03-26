@@ -18,10 +18,10 @@ gem 'carrierwave', '~> 1.0'
 gem 'mini_magick', '~> 4.8'
 gem 'rails-assets-jcrop', source: 'https://rails-assets.org'
 gem 'pg_search'
-# gem 'jquery-rails'
+gem 'jquery-rails'
 gem 'slim'
 gem 'fog-aws'
-# gem 'lodash-rails'
+gem 'lodash-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
