@@ -17,8 +17,8 @@
 
 javascript:
 	$(function () {
-		var width = parseInt(__('#header-cropbox').width());
-		var height = parseInt(__('#header-cropbox').height());
+		var width = parseInt($('#header-cropbox').width());
+		var height = parseInt($('#header-cropbox').height());
 		$('#header-cropbox').Jcrop({
 			aspectRatio: 4,
 			setSelect: [0, 0, width, height],
@@ -27,19 +27,19 @@ javascript:
 		});
 
 		function updatePreview (coords) {
-			__('#post_crop_x').val(coords.x);
-		    __('#post_crop_y').val(coords.y);
-		    __('#post_crop_w').val(coords.w);
-		    __('#post_crop_h').val(coords.h);
+			$('#post_crop_x').val(coords.x);
+		    $('#post_crop_y').val(coords.y);
+		    $('#post_crop_w').val(coords.w);
+		    $('#post_crop_h').val(coords.h);
 		    showPreview(coords);
 		}
 
 		function showPreview (coords) {
 			var rx = 800 / coords.w;
 			var ry = 200 / coords.h;
-			__('#header-preview').css({
-				width: Math.round(rx * __('#header-cropbox').width()) + 'px',
-				height: Math.round(ry * __('#header-cropbox').height()) + 'px',
+			$('#header-preview').css({
+				width: Math.round(rx * $('#header-cropbox').width()) + 'px',
+				height: Math.round(ry * $('#header-cropbox').height()) + 'px',
 				margin_left: '-' + Math.round(rx * coords.x) + 'px',
 				margin_top: '-' + Math.round(ry * coords.y) + 'px'
 			});
