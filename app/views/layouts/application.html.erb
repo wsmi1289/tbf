@@ -13,7 +13,7 @@
 <%= render 'layouts/header', controller: controller.controller_name %>
 <%= render 'layouts/nav' %>
 <% if notice %>
-  <p id="notice"><%= notice %></p>
+  <div id="notice" class="alert alert-info center"><%= notice %></div>
 <% end -%>
 <div class="container-fluid">
   <div class="row">

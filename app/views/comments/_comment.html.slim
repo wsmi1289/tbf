@@ -1,8 +1,7 @@
 .comment.clearfix
   p
     strong = comment.name
-  p.text-content
-    / .btn.btn-link.expand-text Read Full Comment
+  p.text-content data-id='#{comment.id}'
     .btn.btn-link.collapse-text.hidden Close Comment
   p #{time_ago_in_words(comment.created_at)} Ago, By:
   strong = comment.user.email
@@ -12,9 +11,10 @@
                 method: :delete,
                 class: "btn btn-link",
                 data: {confirm: "Are You Sure?"}
-                 / 
+hr
+
 javascript:
   $(function () {
     var fullComment = '#{strip_tags(comment.body)}';
-    tbfEvent.expandText(fullComment);
+    tbfEvent.expandText(fullComment, #{comment.id});
   });

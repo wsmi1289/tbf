@@ -1,3 +1,10 @@
+// extend jquery
+$.fn.extend({
+    toggleText: function(a, b){
+        return this.text(this.text() == b ? a : b);
+    }
+});
+
 function __(el) {
 	if (window === this) { return new __(el); };
 	this.e = document.querySelector(el);

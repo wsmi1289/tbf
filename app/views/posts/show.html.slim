@@ -17,8 +17,11 @@
         .col-md-8
           h2 #{@post.comments.count} Comments
         .col-md-2
-          = link_to 'View All', comments_path(post_id: @post.id), class: 'btn btn-light'
-      = render @post.comments, comment: @post.comments.last
+          .btn.btn-light.view-all-comments View All
+      .comments-three
+        = render @post.comments.last(3)
+      .all-comments.hidden
+        = render @post.comments
     - if current_user.try(:admin?)
       = link_to 'Edit', edit_post_path(@post), class: 'btn btn-link'
       | |
@@ -27,5 +30,6 @@ javascript:
   $(function () {
     var position = "#{@post.title_position}";
     var postTitle = $('.post-title[data-id=#{@post.id}]');
-    titlePosition(position, postTitle)
+    titlePosition(position, postTitle);
+    tbfEvent.showHideComments();
   });
