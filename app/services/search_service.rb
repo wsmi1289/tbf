@@ -10,9 +10,7 @@ class SearchService
     @models = filter_models if @params.key?(:filter)
     @models = find_models if @params.key?(:q)
     @models = @models.try(:in_stock) || @models if @current_user.try(:client)
-    @models.order("LOWER(title) DESC")
-    @models = sort_models if @params.slice(:sort, :direction).keys.count == 2
-    @models
+    sort_models
   end
 
   private
@@ -25,6 +23,9 @@ class SearchService
     end
 
     def sort_models
-      @models.order("LOWER(#{@params[:sort]}) #{@params[:direction]}")
+      sort_direction = @params[:direction] == 'down' ? 'DESC' : 'ASC'
+      sort_col = @params[:sort] == 'price' ?
+        @params[:sort] : "LOWER(#{@params[:sort] || 'title'})"
+      @models.order(Arel.sql("#{sort_col} #{sort_direction}"))
     end
 end

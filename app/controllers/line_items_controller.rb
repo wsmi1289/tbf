@@ -3,10 +3,6 @@ class LineItemsController < ApplicationController
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
   before_action :client?
 
-  def checkout
-    render 'checkout'
-  end
-
   def create
     product = Product.find(params[:product_id])
     quantity = params[:quantity].blank? ? 1 : params[:quantity].to_i

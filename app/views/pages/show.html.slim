@@ -13,7 +13,10 @@
 - elsif @page.bottom_sidebar?
 	= sanitize(@page.content)
 	= render 'pages/sidebar', page: @page
+- elsif @page.top_sidebar?
+	= render 'pages/sidebar', page: @page
+	= sanitize(@page.content)
 - else
  = sanitize(@page.content)
 - if current_user.try(:admin)
-  a.btn.btn-light href=edit_page_path(@page.slug) Edit Page
+  a.btn.btn-light.mt-2 href=edit_page_path(@page.slug) Edit Page

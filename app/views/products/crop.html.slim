@@ -24,13 +24,14 @@ javascript:
 			onChange: updatePreview,
 			onSelect: updatePreview,
 		});
+
 		function updatePreview (coords) {
 			$('#product_crop_x').val(coords.x);
 	    $('#product_crop_y').val(coords.y);
 	    $('#product_crop_w').val(coords.w);
 	    $('#product_crop_h').val(coords.h);
 	    showPreview(coords);
-		}
+		};
 
 		function showPreview (coords) {
 			var rx = 200 / coords.w;
@@ -41,10 +42,9 @@ javascript:
 			$('#product-preview').css({
 				width: Math.round(rx * w) + 'px',
 				height: Math.round(ry * h) + 'px',
-				margin_left: '-' + Math.round(rx * coords.x) + 'px',
-				margin_top: '-' + Math.round(ry * coords.y) + 'px'
+				marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+				marginTop: '-' + Math.round(ry * coords.y) + 'px'
 			});
-		}
+		};
 
-		// Jcrop.attach('cropbox');
 	});

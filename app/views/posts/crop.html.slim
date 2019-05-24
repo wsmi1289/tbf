@@ -32,7 +32,7 @@ javascript:
 		    $('#post_crop_w').val(coords.w);
 		    $('#post_crop_h').val(coords.h);
 		    showPreview(coords);
-		}
+		};
 
 		function showPreview (coords) {
 			var rx = 800 / coords.w;
@@ -40,10 +40,9 @@ javascript:
 			$('#header-preview').css({
 				width: Math.round(rx * $('#header-cropbox').width()) + 'px',
 				height: Math.round(ry * $('#header-cropbox').height()) + 'px',
-				margin_left: '-' + Math.round(rx * coords.x) + 'px',
-				margin_top: '-' + Math.round(ry * coords.y) + 'px'
+				marginLeft: '-' + Math.round(rx * coords.x) + 'px',
+				marginTop: '-' + Math.round(ry * coords.y) + 'px'
 			});
-		}
+		};
 
-		// Jcrop.attach('cropbox');
 	});

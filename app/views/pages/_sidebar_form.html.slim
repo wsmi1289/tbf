@@ -11,3 +11,6 @@ h4 Sidebar Settings
 .form-check.form-check-inline
   = f.radio_button(:sidebar_status, :bottom_sidebar, { class: 'form-check-input' }) 
   = f.label :bottom_sidebar, "Bottom", class: 'form-check-label'
+.form-check.form-check-inline
+  = f.radio_button(:sidebar_status, :top_sidebar, { class: 'form-check-input' }) 
+  = f.label :top_sidebar, "Top", class: 'form-check-label'

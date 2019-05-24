@@ -5,11 +5,7 @@ class AdminController < ApplicationController
     @total_sales = total_sales
   end
 
-  def users
-    @users = User.all
-  end
-
-  def create
+  def update
     @user = User.find(params[:id])
     respond_to do |format|
       if @user.update_attribute(:client, params[:client])

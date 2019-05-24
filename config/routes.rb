@@ -5,17 +5,14 @@ Rails.application.routes.draw do
   get 'two_barn_farm', to: 'landings#two_barn_farm'
   get '/store', to: 'store#index'
   
-  resources :users, only: [:update]
-  resources :admin, only: [:index, :create] do
-    get 'users', to: 'admin#users'
-  end
+  resources :users, only: [:index, :show, :update]
+  resources :admin, only: [:index, :update]
   resources :categories
-  resources :comments
+  resources :comments, only: [:index, :new, :create, :destroy]
   resources :posts
-  resource :checkouts
-  resources :users
-  resources :line_items
-  resources :carts
+  resource :checkouts, only: [:new, :create]
+  resources :line_items, only: [:create, :update, :destroy]
+  resources :carts, except: [:index]
   resources :pages, path: :tbf
   resources :products
 

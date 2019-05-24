@@ -14,4 +14,4 @@
 - unless [1, @page].include?((Product.all.count/2).ceil)
   = link_to 'Show All', products_path({all: true}), class: 'btn'
   = link_to 'Next', products_path({page: @page+1}), class: 'btn'
-= render 'misc/product_search'
+= render 'misc/product_search', path: products_path
