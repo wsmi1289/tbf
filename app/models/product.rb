@@ -4,7 +4,7 @@ class Product < ActiveRecord::Base
 
   # Pg Search stuff
   include PgSearch
-  pg_search_scope :search_products, associated_against: {
+  pg_search_scope :search_scope, associated_against: {
     category: [:name] }, against: {
     title: 'A',
     description: 'B',
@@ -23,6 +23,8 @@ class Product < ActiveRecord::Base
   validates :price, numericality: {greater_than_or_equal_to: 0.01}
   validates :title, uniqueness: true
   before_destroy :ensure_not_referenced_by_any_line_item
+
+  scope :in_stock, -> { where(in_stock: true) }
 
   def crop_image
     image.recreate_versions! if crop_x.present?

@@ -1,33 +1,12 @@
 class StoreController < ApplicationController
-  before_action :searching?
+  before_action :set_page, only: [:index]
   before_action :admin?
   def index
-    @products = Product.all
-  end
-
-  def filter
-    if params.has_key?(:product)
-      filter = params[:product][:filter]
-      @products = Product.where(category: filter)
+    @products = SearchService.new(Product, params, current_user.id).search
+    @products = @products.limit(2).offset(@page*2) unless all?
       respond_to do |format|
+        format.html
         format.js
       end
-    else
-      render "index"
-    end
   end
-
-  def sort
-    @products = Product.all.order("#{params[:sort]} #{params[:direction]}")
-    render 'index'
-  end
-
-  private
-
-    def searching?
-      if params.has_key?(:q)
-        @products = Product.search_products(params[:q]).order("created_at DESC")
-        render "index"
-      end
-    end
 end

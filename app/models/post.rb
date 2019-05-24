@@ -1,6 +1,6 @@
 class Post < ActiveRecord::Base
   include PgSearch
-  pg_search_scope :search_posts, against: {
+  pg_search_scope :search_scope, against: {
     title: 'A',
     body: 'B'
   }, using: { tsearch: { prefix: true } }

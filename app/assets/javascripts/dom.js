@@ -1,17 +1,17 @@
-// extend jquery
-$.fn.extend({
-    toggleText: function(a, b){
-        return this.text(this.text() == b ? a : b);
-    }
-});
+// // extend jquery
+// $.fn.extend({
+//     toggleText: function(a, b){
+//         return this.text(this.text() == b ? a : b);
+//     }
+// });
 
-function __(el) {
-	if (window === this) { return new __(el); };
+function ws(el) {
+	if (window === this) { return new ws(el); };
 	this.e = document.querySelector(el);
 	return this;
 };
 
-__.prototype = {
+ws.prototype = {
 	on: function (event, callback) {
 		this.e.addEventListener(event, callback, false);
 	},
@@ -53,5 +53,13 @@ __.prototype = {
 
 	width: function () {
 		return this.e.width;
+	},
+
+	text: function (newText) {
+		return this.e.textContent = newText;
+	},
+
+	toggleText: function (a, b) {
+		return this.e.textContent = this.e.textContent == b ? a : b;
 	}
 }

@@ -1,22 +1,16 @@
 class ProductsController < ApplicationController
+  before_action :set_page, only: [:index]
   before_action :set_product, only: [:show, :edit, :update, :destroy, :toggle]
   before_action :set_cart
   before_action :client?
 
   def index
-    if params.has_key?(:q)
-      if current_user.try(:admin)
-        @products = Product.search_products(params[:q]).order("created_at DESC")
-      else
-        @products = Product.where(in_stock: true).search_products(params[:q]).order("created_at DESC")
-      end
-    elsif params.has_key?(:filter)
-      @products = Product.where(category_id: params[:filter][:category])
-      respond_to do |format|
-        format.js
-      end
-    else
-      @products = Product.where(in_stock: true)
+    @products = SearchService.new(Product, params, current_user.id).search
+    @products = @products.limit(2).offset(@page*2) unless all?
+    redirect_to posts_path(params.permit(:q)) if @products.empty?
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 
@@ -61,28 +55,11 @@ class ProductsController < ApplicationController
     end
   end
 
-  def toggle
-    respond_to do |format|
-      if @product.update_attribute(:in_stock, params[:in_stock])
-        format.html { redirect_to products_url, notice: 'Product was successfully created.' }
-        format.js
-        format.json { render :show, status: :created, location: @product }
-      else
-        format.html { render :new }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
-      end
-    end
-  end
   private
 
     def product_params
       params.require(:product).permit(:title, :description, :category_id, :price, :image, :in_stock, :crop_x, :crop_y, :crop_w, :crop_h)
     end
-
-    # def searching?
-    #     render "index"
-    #   end
-    # end
 
     def set_product
       @product = Product.find(params[:id])

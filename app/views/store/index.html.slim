@@ -9,11 +9,22 @@ table.table.table-striped
   thead 
     th = sortable('title', "Name")
     th 
-      = select(:product, :filter, Category.all.collect { |c| [c.name, c.id] }, { include_blank: "Category" }, data: { remote: true, url: url_for(controller: 'store', action: 'filter')})
+      = select(:filter, :category, Category.all.collect { |c| [c.name, c.id] }, { include_blank: "Category" }, data: { remote: true, url: '/store'})
     th = sortable('description', "Description")
     th = sortable('price', "Price")
     th = sortable('in_stock', "In Stock")
     th Edit
   tbody.product-table
     = render 'product_row'
+  tfoot
+    tr
+      td
+        - unless @page <= 0
+          = link_to 'Back', store_path({page: @page-1}), class: 'btn'
+        - unless [1, @page].include?((Product.all.count/2).ceil)
+          = link_to 'Show All', store_path({all: true}), class: 'btn'
+          = link_to 'Next', store_path({page: @page+1}), class: 'btn'
+      - 6.times do
+        td
+
 = render 'misc/product_search'

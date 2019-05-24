@@ -19,4 +19,4 @@
         = link_to 'Delete', product, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-light' 
         = link_to 'Edit', edit_product_path(product), class: 'btn btn-light'
         label.mr-3 In Stock
-        = check_box_tag('in_stock', "true", product.in_stock, data: {id: product.id, remote: true, url: url_for( controller: 'products', action: 'toggle', id: product.id), method: "POST" })
+        = check_box_tag('in_stock', "true", product.in_stock, data: {id: product.id, remote: true, url: product_path({id: product.id, product: {in_stock: !product.in_stock}}), method: "PUT" })

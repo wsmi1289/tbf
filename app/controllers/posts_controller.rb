@@ -1,9 +1,11 @@
 class PostsController < ApplicationController
+  before_action :set_page, only: [:index]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :searching?
 
   def index
-    @posts = Post.all
+    @posts = SearchService.new(Post, params, current_user.id).search
+    @posts = @posts.limit(2).offset(@page*2) unless all?
+    redirect_to products_path(params.permit(:q)) if @posts.empty?
   end
 
   def show
@@ -54,13 +56,6 @@ class PostsController < ApplicationController
 
     def post_params
       params.require(:post).permit(:title, :body, :image, :crop_x, :crop_y, :crop_w, :crop_h, :title_position)
-    end
-    
-    def searching?
-      if params.has_key?(:q)
-        @posts = Post.search_posts(params[:q]).order("created_at DESC")
-        render "index"
-      end
     end
 
     def set_post

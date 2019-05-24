@@ -4,8 +4,6 @@ Rails.application.routes.draw do
   get 'flower_smith', to: 'landings#flower_smith'
   get 'two_barn_farm', to: 'landings#two_barn_farm'
   get '/store', to: 'store#index'
-  get '/filter', to: 'store#filter'
-  get '/sort', to: 'store#sort'
   
   resources :users, only: [:update]
   resources :admin, only: [:index, :create] do
@@ -19,10 +17,7 @@ Rails.application.routes.draw do
   resources :line_items
   resources :carts
   resources :pages, path: :tbf
-  resources :products do
-    get :who_bought, on: :member
-    post 'toggle', on: :member
-  end
+  resources :products
 
 
   root 'landings#two_barn_farm', as: 'tbf'

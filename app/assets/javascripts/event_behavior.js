@@ -1,22 +1,19 @@
 var tbfEvent = {
 	expandText: function (fullText, id) {
-		var btn = "<div class='btn btn-link expand-text'>See Comment</div>";
+		var btn = "<div class='btn btn-link expand-text'>See Comment</div>",
+				truncatedText = fullText.length > 200 ? fullText.truncate(200) + btn : fullText,
+				textEl = $(".text-content[data-id='"+id+"'"),
+				collapseBtn = $(".collapse-text[data-id='"+id+"'");
 
-		var truncatedText = fullText.length > 200 ?
-					_.truncate(fullText, { length: 200 }) + btn :
-					fullText;
-				contentWrapper = $('.text-content[data-id="'+id+'"]'),
-				collapseBtn = $('.collapse-text');
+		textEl.html(truncatedText);
 
-		contentWrapper.html(truncatedText);
-
-		$('.expand-text').on('click', function () {
-	    contentWrapper.html(fullText);
+		textEl.find('.expand-text').on('click', function () {
+	    textEl.html(fullText);
 			collapseBtn.removeClass('hidden');
 		}),
 
 	  collapseBtn.on('click', function () {
-			tbfEvent.expandText(fullText);
+			tbfEvent.expandText(fullText, id);
 			collapseBtn.addClass('hidden');
 	  })
 	},
@@ -25,7 +22,7 @@ var tbfEvent = {
 		$('.view-all-comments').on('click', function () {
 			$('.comments-three').toggleClass('hidden');
 			$('.all-comments').toggleClass('hidden');
-			$('.view-all-comments').toggleText('View All', 'Hide');
+			ws('.view-all-comments').toggleText('View All', 'Hide');
 		})
 	}
 }
