@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-  PAGE=1
   protect_from_forgery with: :exception
 
   private

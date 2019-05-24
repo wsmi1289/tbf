@@ -1,10 +1,11 @@
 class PostsController < ApplicationController
+  include PaginationHelper
   before_action :set_page, only: [:index]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
     @posts = SearchService.new(Post, params, current_user.id).search
-    @posts = @posts.limit(10).offset(@page*10) unless all?
+    @posts = @posts.limit(per_page).offset(@page*per_page) unless all?
     redirect_to products_path(params.permit(:q)) if @posts.empty?
   end
 

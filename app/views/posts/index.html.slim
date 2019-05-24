@@ -7,8 +7,11 @@
 - @posts.each do |post|
   = render 'posts/post', post: post
 br
-- unless @page <= 0
+- unless no_back?
   = link_to 'Back', posts_path({page: @page-1}), class: 'btn'
-- unless [1, @page].include?((Post.all.count/2).ceil)
-	= link_to 'Show All', posts_path({all: true}), class: 'btn'
-	= link_to 'Next', posts_path({page: @page+1}), class: 'btn'
+- unless no_next?(Post)
+	- if showing_all?(Post)
+		= link_to 'Back', posts_path({page: @page}), class: 'btn'
+	- else
+		= link_to 'Show All', posts_path({all: true}), class: 'btn'
+		= link_to 'Next', posts_path({page: @page+1}), class: 'btn'

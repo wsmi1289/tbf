@@ -19,10 +19,12 @@ table.table.table-striped
   tfoot
     tr
       td
-        - unless @page <= 0
+        - unless no_back?
           = link_to 'Back', store_path({page: @page-1}), class: 'btn'
-        - unless [1, @page].include?((Product.all.count/2).ceil)
-          - unless params[:all] == 'true'
+        - unless no_next?(Product)
+          - if showing_all?(Product)
+            = link_to 'Back', store_path({page: @page}), class: 'btn'
+          - else
             = link_to 'Show All', store_path({all: true}), class: 'btn'
             = link_to 'Next', store_path({page: @page+1}), class: 'btn'
       - 6.times do

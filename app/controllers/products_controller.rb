@@ -1,12 +1,13 @@
 class ProductsController < ApplicationController
+  include PaginationHelper
   before_action :set_page, only: [:index]
-  before_action :set_product, only: [:show, :edit, :update, :destroy, :toggle]
+  before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_cart
   before_action :client?
 
   def index
     @products = SearchService.new(Product, params, current_user.id).search
-    @products = @products.limit(10).offset(@page*10) unless all?
+    @products = @products.limit(per_page).offset(@page*per_page) unless all?
     redirect_to posts_path(params.permit(:q)) if @products.empty?
     respond_to do |format|
       format.html
