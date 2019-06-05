@@ -1,6 +1,6 @@
 class CheckoutsController < ApplicationController
   before_action :set_cart
-  before_action :client?
+  before_action :current_user_client?
   def new
     @order = Order.new
   end

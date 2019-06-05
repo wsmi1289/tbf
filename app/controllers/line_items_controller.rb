@@ -1,7 +1,7 @@
 class LineItemsController < ApplicationController
   before_action :set_cart, only: [:create, :update]
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
-  before_action :client?
+  before_action :current_user_client?
 
   def create
     product = Product.find(params[:product_id])

@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-  before_action :set_cart, :admin?
+  before_action :set_cart, :current_user_admin?
   def index
     @orders = Order.all
     @total_sales = total_sales

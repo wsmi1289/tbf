@@ -1,6 +1,6 @@
 class CartsController < ApplicationController
   before_action :set_cart, only: [:edit, :update, :destroy]
-  before_action :client?
+  before_action :current_user_client?
 
   def show
     @cart = Cart.find(params[:id])
