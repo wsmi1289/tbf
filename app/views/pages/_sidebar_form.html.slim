@@ -1,0 +1,16 @@
+h4 Sidebar Settings
+.form-check.form-check-inline
+  = f.radio_button(:sidebar_status, :hide_sidebar, { class: 'form-check-input' }) 
+  = f.label :hide_sidebar, "Hide", class: 'form-check-label'
+.form-check.form-check-inline
+  = f.radio_button(:sidebar_status, :left_sidebar, { class: 'form-check-input' }) 
+  = f.label :left_sidebar, "Left", class: 'form-check-label'
+.form-check.form-check-inline
+  = f.radio_button(:sidebar_status, :right_sidebar, { class: 'form-check-input' }) 
+  = f.label :right_sidebar, "Right", class: 'form-check-label'
+.form-check.form-check-inline
+  = f.radio_button(:sidebar_status, :bottom_sidebar, { class: 'form-check-input' }) 
+  = f.label :bottom_sidebar, "Bottom", class: 'form-check-label'
+.form-check.form-check-inline
+  = f.radio_button(:sidebar_status, :top_sidebar, { class: 'form-check-input' }) 
+  = f.label :top_sidebar, "Top", class: 'form-check-label'

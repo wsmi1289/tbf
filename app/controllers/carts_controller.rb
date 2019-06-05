@@ -1,8 +1,9 @@
 class CartsController < ApplicationController
-  before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  before_action :set_cart, only: [:edit, :update, :destroy]
   before_action :client?
 
   def show
+    @cart = Cart.find(params[:id])
   end
 
   def create
@@ -31,8 +32,13 @@ class CartsController < ApplicationController
   end
 
   def destroy
-    @cart.destroy if @cart.id == session[:cart_id]
-    session[:cart_id] = nil
+    # if @cart.id == session[:cart_id]
+    #   @cart.destroy
+    #   session[:cart_id] = nil
+    # else
+    @cart.line_items.each do |item|
+      item.destroy
+    end
     respond_to do |format|
       format.html { redirect_to products_url }
       format.json { head :no_content }

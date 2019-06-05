@@ -1,34 +1,13 @@
 class StoreController < ApplicationController
-  before_action :searching?
+  include PaginationHelper
+  before_action :set_page, only: [:index]
   before_action :admin?
   def index
-    @products = Product.all
-  end
-
-  def filter
-    if params.has_key?(:product)
-      filter = params[:product][:filter]
-      puts filter
-      @products = Product.where(category: filter)
-      respond_to do |format|
-        format.js
-      end
-    else
-      render "index"
+    @products = SearchService.new(Product, params, current_user.id).search
+    @products = @products.limit(per_page).offset(@page*per_page) unless all?
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
-
-  def sort
-    @products = Product.all.order("#{params[:sort]} #{params[:direction]}")
-    render 'index'
-  end
-
-  private
-
-    def searching?
-      if params.has_key?(:q)
-        @products = Product.search_products(params[:q]).order("created_at DESC")
-        render "index"
-      end
-    end
 end

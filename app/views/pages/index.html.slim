@@ -1,0 +1,14 @@
+table.table.table-striped
+  thead
+    tr
+      th Slug
+      th Name
+      th View
+      th Edit
+  tbody
+    - @pages.each do |page|
+      = render 'pages/page', page: page
+  tfoot
+    tr
+      td
+        = link_to 'New Page', new_page_path, class: 'btn btn-lg btn-light'

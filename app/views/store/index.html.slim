@@ -1,0 +1,33 @@
+.row
+  .col-md-5
+    h1 Listing Products
+  .col-md-7.mt-2
+    a.btn.btn-light.mr-3 href=new_product_path New Product
+    a.btn.btn-light.mr-3 href=products_path Back
+    a.btn.btn-light.mr-3 href=categories_path Categories
+table.table.table-striped
+  thead 
+    th = sortable('title', "Name")
+    th 
+      = select(:filter, :category, Category.all.collect { |c| [c.name, c.id] }, { include_blank: "Category" }, data: { remote: true, url: '/store'})
+    th = sortable('description', "Description")
+    th = sortable('price', "Price")
+    th = sortable('in_stock', "In Stock")
+    th Edit
+  tbody.product-table
+    = render 'product_row'
+  tfoot
+    tr
+      td
+        - unless no_back?
+          = link_to 'Back', store_path({page: @page-1}), class: 'btn'
+        - unless no_next?(Product)
+          - if showing_all?(Product)
+            = link_to 'Back', store_path({page: @page}), class: 'btn'
+          - else
+            = link_to 'Show All', store_path({all: true}), class: 'btn'
+            = link_to 'Next', store_path({page: @page+1}), class: 'btn'
+      - 6.times do
+        td
+
+= render 'misc/product_search', path: store_path

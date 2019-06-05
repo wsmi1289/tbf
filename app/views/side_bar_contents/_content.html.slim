@@ -1,0 +1,12 @@
+.card
+	ul.list-group.list-group-flush
+		li.list-group-item
+			.row
+				.col-md-7
+					h3.mb-0
+						a.text-dark href="#" #{this.title}
+					p.card-text.mb-auto = truncate(strip_tags(this.content), length: 50)
+				.col-md-5
+					img.card-img-right.flex-auto.d-none.d-lg-block.img-fluid data-src="holder.js/200x250?theme=thumb" alt="Thumbnail [200x250]" src=this.image_url(:thumb) data-holder-rendered="true"
+			a.card-link href=this.link Continue reading
+			

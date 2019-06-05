@@ -3,13 +3,9 @@ class LineItemsController < ApplicationController
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
   before_action :client?
 
-  def checkout
-    render 'checkout'
-  end
-
   def create
     product = Product.find(params[:product_id])
-    quantity = params[:quantity].to_i
+    quantity = params[:quantity].blank? ? 1 : params[:quantity].to_i
     @line_item = @cart.add_product(product.id, quantity)
 
     respond_to do |format|
@@ -26,7 +22,7 @@ class LineItemsController < ApplicationController
   def update
     respond_to do |format|
       if @line_item.update(line_item_params)
-        format.html { redirect_to products_path, notice: 'Line item was successfully updated.' }
+        format.html { redirect_to @line_item.cart, notice: 'Line item was successfully updated.' }
         format.json { render :show, status: :ok, location: @line_item }
       else
         format.html { render :edit }

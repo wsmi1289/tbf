@@ -1,0 +1,28 @@
+= form_for(@page) do |f|
+  - if @page.errors.any?
+    div#error_explanation
+      h2 #{pluralize(@page.errors.count, "error")} prohibited this page from being saved:
+
+      ul
+      - @page.errors.full_messages.each do |message|
+        li= message
+  .row
+    .col
+      = render 'sidebar_form.html.slim', f: f
+    .col
+      = render 'link_position_form.html.slim', f: f
+  .row
+    .col
+      .form-group
+        = f.label :slug 
+        = f.text_field :slug, class: 'form-control form-control-lg'
+    .col
+      .form-group
+        = f.label :name 
+        = f.text_field :name, class: 'form-control form-control-lg'
+  .form-group
+    = f.label :content 
+    = f.text_area :content, 'data-provider': :summernote, class: 'form-control form-control-lg'
+
+  .actions.mt-3
+    = f.submit class: 'btn btn-light btn-lg btn-block'

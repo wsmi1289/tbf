@@ -4,13 +4,32 @@ class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
-  # storage :fog
+  # storage :file
+  if Rails.env.staging? || Rails.env.production?
+    storage :fog
+  else
+    storage :file
+  end
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  end
+
+  def crop
+    if model.crop_x.present?
+      resize_to_limit(600, 600)
+      manipulate! do |img|
+        x = model.crop_x.to_i
+        y = model.crop_y.to_i
+        w = model.crop_w.to_i
+        h = model.crop_h.to_i
+        # [[w, h].join('x'),[x, y].join('+')].join('+') => "wxh+x+y"
+        img.crop([[w, h].join('x'),[x, y].join('+')].join('+'))
+        # img.crop!(x, y, w, h)
+      end
+    end
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -30,11 +49,18 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :thumb do
+    process :crop
     process resize_to_fit: [200, 200]
   end
 
   version :header do
+    process :crop
     process resize_to_fill: [800, 200]
+  end
+
+  version :large do
+    # process :crop
+    resize_to_limit(600, 600)
   end
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

@@ -1,27 +1,20 @@
 Rails.application.routes.draw do
+  resources :side_bar_contents
   devise_for :users
-  get '/admin', to: 'admin#index'
   get 'flower_smith', to: 'landings#flower_smith'
   get 'two_barn_farm', to: 'landings#two_barn_farm'
-  get 'csa', to: 'landings#csa'
-  get 'farmers', to: 'landings#farmers'
-  get 'plants', to: 'landings#plants'
   get '/store', to: 'store#index'
-  get '/filter', to: 'store#filter'
-  get '/sort', to: 'store#sort'
-
+  
+  resources :users, only: [:index, :show, :update]
+  resources :admin, only: [:index, :update]
   resources :categories
-  resources :comments
+  resources :comments, only: [:index, :new, :create, :destroy]
   resources :posts
-  resource :checkout
-  resources :users
-  resources :line_items
-  resources :carts
-
-  resources :products do
-    get :who_bought, on: :member
-    post 'toggle', on: :member
-  end
+  resource :checkouts, only: [:new, :create]
+  resources :line_items, only: [:create, :update, :destroy]
+  resources :carts, except: [:index]
+  resources :pages, path: :tbf
+  resources :products
 
 
   root 'landings#two_barn_farm', as: 'tbf'

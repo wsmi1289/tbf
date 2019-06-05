@@ -1,9 +1,12 @@
 class PostsController < ApplicationController
+  include PaginationHelper
+  before_action :set_page, only: [:index]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :searching?
 
   def index
-    @posts = Post.all
+    @posts = SearchService.new(Post, params, current_user.id).search
+    @posts = @posts.limit(per_page).offset(@page*per_page) unless all?
+    redirect_to products_path(params.permit(:q)) if @posts.empty?
   end
 
   def show
@@ -19,26 +22,26 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
 
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
+    if @post.save
+      if post_params[:image].present?
+        render :crop
       else
-        format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+        redirect_to @post
       end
+    else
+      render :new
     end
   end
 
   def update
-    respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @post }
+    if @post.update(post_params)
+      if post_params[:image].present?
+        render :crop
       else
-        format.html { render :edit }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+        redirect_to @post
       end
+    else
+      render :edit
     end
   end
 
@@ -53,14 +56,7 @@ class PostsController < ApplicationController
   private
 
     def post_params
-      params.require(:post).permit(:title, :body, :image)
-    end
-    
-    def searching?
-      if params.has_key?(:q)
-        @posts = Post.search_posts(params[:q]).order("created_at DESC")
-        render "index"
-      end
+      params.require(:post).permit(:title, :body, :image, :crop_x, :crop_y, :crop_w, :crop_h, :title_position)
     end
 
     def set_post

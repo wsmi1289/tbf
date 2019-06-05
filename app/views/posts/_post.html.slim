@@ -1,0 +1,13 @@
+.card.mt-5.border-0
+  = image_tag(post.image_url(:header), class: "card-img-top")
+  .card-img-overlay
+		h1.post-title data-id="#{post.id}" = post.title
+  .card-body
+    p.card-text = truncate(strip_tags(post.body), length: 250)
+		a.btn.btn-link href=post_path(post.id) Read Full Post
+javascript:
+	$(function () {
+		var position = "#{post.title_position}";
+		var postTitle = $('.post-title[data-id=#{post.id}]');
+		titlePosition(position, postTitle)
+	});

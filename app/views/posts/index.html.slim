@@ -1,0 +1,17 @@
+.row
+  .col-md-8.offset-md-2
+    h1.center.mt-3.mb-3 Recent Posts
+  .col-md-2
+    - if current_user.try(:admin?)
+      = link_to 'New Post', new_post_path, class: 'btn btn-lg btn-light'
+- @posts.each do |post|
+  = render 'posts/post', post: post
+br
+- unless no_back?
+  = link_to 'Back', posts_path({page: @page-1}), class: 'btn'
+- unless no_next?(Post)
+	- if showing_all?(Post)
+		= link_to 'Back', posts_path({page: @page}), class: 'btn'
+	- else
+		= link_to 'Show All', posts_path({all: true}), class: 'btn'
+		= link_to 'Next', posts_path({page: @page+1}), class: 'btn'

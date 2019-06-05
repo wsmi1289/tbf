@@ -1,0 +1,26 @@
+.prev-prod {
+	width: 200px;
+	height: 200px;
+	overflow: hidden;
+
+	img {
+		max-width: none !important;
+	}
+
+}
+
+.prev-header {
+	width: 800px;
+	height: 200px;
+	overflow: hidden;
+
+	img {
+		max-width: none !important;
+	}
+
+}
+
+.hidden {
+	display: none !important;
+	visibility: hidden;
+}

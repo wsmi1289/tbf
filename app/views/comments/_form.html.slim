@@ -1,0 +1,21 @@
+= form_for(@comment) do |f|
+  - if @comment.errors.any?
+    #error_explanation
+      h2 #{pluralize(@comment.errors.count, "error")} prohibited this comment from being saved:
+
+      ul
+      - @comment.errors.full_messages.each do |message|
+        li = message
+
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control form-control-lg'
+  .form-group
+    = f.label :body
+    = f.text_area :body , 'data-provider': :summernote, class: 'form-control form-control-lg'
+  .field
+    = f.hidden_field :post_id, value: params[:post_id]
+  .field
+    = f.hidden_field :user_id, value: current_user.id
+  .actions
+    = f.submit "Create", class: "btn btn-lg btn-primary"

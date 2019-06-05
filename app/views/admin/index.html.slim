@@ -1,0 +1,31 @@
+section#admin
+  .row
+    .col
+      h1 Welcome
+    .col
+      a.btn.btn-light.mr-3 href=pages_path Pages
+      a.btn.btn-light.mr-3 href=categories_path Categories
+      a.btn.btn-light.mr-3 href=users_path Users
+      a.btn.btn-light.mr-3 href=store_path Product List
+  .center
+    table.table.table-striped
+      thead
+        tr
+          th Order
+          th Customer
+          th Amount
+          th
+          th
+      tbody
+        - @orders.each do |order|
+          tr
+            td = order.cart_id
+            td = order.user.email
+            td = number_to_currency(order.cart.total_price)
+            td
+              = button_to 'Destroy', order.cart, method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-light'
+            td
+              = link_to 'View Cart', cart_path(order.cart, view_only: true), class: 'btn btn-light'
+      tfoot
+        tr
+          td.right-align Total Billable #{number_to_currency(@total_sales)}

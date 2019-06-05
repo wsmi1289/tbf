@@ -1,0 +1,16 @@
+.row
+  .col-md-8.offset-md-2
+    table.table.table-striped
+      thead
+        tr
+          th Product
+          th Total
+      tbody
+        = render @cart.line_items, btns: false
+      tfoot
+        tr
+          td Total: #{number_to_currency(@cart.total_price)}
+    = form_tag '/checkouts'
+      .actions
+        = submit_tag "Submit", class: 'btn btn-light'
+      

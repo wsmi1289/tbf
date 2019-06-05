@@ -1,0 +1,20 @@
+.row
+  .col-md-6
+    h1.ml-5 Store
+  .col-md-2
+    = select(:filter, :category, Category.all.collect { |c| [c.name, c.id] }, { include_blank: "Category" }, data: { remote: true, url: url_for(controller: 'products', action: 'index')}, class: 'form-control')
+  .col-md-4
+    - if current_user.try(:admin)
+      = link_to "New Product", new_product_path, class: "btn btn-light mr-3"
+    = link_to 'Back', products_path, class: "btn btn-light mr-3"
+#searched.flex-container.mt-1
+  = render 'products/product', products: @products
+- unless no_back?
+  = link_to 'Back', products_path({page: @page-1}), class: 'btn'
+- unless no_next?(Product)
+  - if showing_all?(Product)
+    = link_to 'Back', products_path({page: @page}), class: 'btn'
+  - else
+    = link_to 'Show All', products_path({all: true}), class: 'btn'
+    = link_to 'Next', products_path({page: @page+1}), class: 'btn'
+= render 'misc/product_search', path: products_path

@@ -1,0 +1,35 @@
+.card.border-0.col-center.mt-5
+  = image_tag(@post.image_url(:header), class: "card-img-top")
+  .card-img-overlay
+    .row
+      .col-1
+        = link_to 'Back', posts_path, class: 'btn btn-lg btn-light'
+      .col-11
+        h1.post-title data-id="#{@post.id}" = @post.title
+  .card-body
+    p.card-text = @post.body.html_safe
+  .card-footer.text-center
+    - if @post.comments
+      .row
+        .col-md-2
+          - if user_signed_in?
+            = link_to 'Comment', new_comment_path(post_id: @post.id), class: 'btn btn-light'
+        .col-md-8
+          h2 #{@post.comments.count} Comments
+        .col-md-2
+          .btn.btn-light.view-all-comments View All
+      .comments-three
+        = render @post.comments.last(3)
+      .all-comments.hidden
+        = render @post.comments
+    - if current_user.try(:admin?)
+      = link_to 'Edit', edit_post_path(@post), class: 'btn btn-link'
+      | |
+      = link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-link'
+javascript:
+  $(function () {
+    var position = "#{@post.title_position}";
+    var postTitle = $('.post-title[data-id=#{@post.id}]');
+    titlePosition(position, postTitle);
+    tbfEvent.showHideComments();
+  });

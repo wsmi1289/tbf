@@ -1,0 +1,23 @@
+= form_for(@post) do |f|
+  - if @post.errors.any?
+    #error_explanation
+      h2 = pluralize(@post.errors.count, "error")
+        | prohibited this post from being saved:
+
+      ul
+        - @post.errors.full_messages.each do |message|
+          li = message
+
+  .form-group
+    = f.label :image, "Add an Image"
+    = f.file_field :image, class: 'form-control-file form-control-lg'
+  = render 'posts/title_form', f: f
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: 'form-control form-control-lg'
+
+  .form-group
+    = f.label :body
+    = f.text_area :body, 'data-provider': :summernote, class: 'form-control form-control-lg'
+  .actions.mt-3
+    = f.submit "Post", class: 'btn btn-light btn-lg btn-block'

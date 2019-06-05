@@ -10,8 +10,10 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require lodash
 //= require jquery
 //= require jquery_ujs
+//= require jcrop
 //= require popper
 //= require bootstrap
 //= require summernote/summernote-bs4.min

@@ -1,0 +1,21 @@
+h1 Edit
+- if @page.right_sidebar?
+	.row
+	  .col-md-8
+	    = render 'form'
+	  .col-md-4
+	  	= render 'pages/sidebar'
+- elsif @page.left_sidebar?
+	.row
+	  .col-md-8
+	  	= render 'form'
+	  .col-md-4
+	  	= render 'pages/sidebar'
+- elsif @page.bottom_sidebar?
+  = render 'form'
+  = render 'pages/sidebar'
+- elsif @page.top_sidebar?
+  = render 'pages/sidebar'
+  = render 'form'
+- else
+ 	= render 'form'
