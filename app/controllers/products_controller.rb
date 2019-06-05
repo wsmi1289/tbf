@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
   def index
     @products = SearchService.new(Product, params, current_user.id).search
     @products = @products.limit(per_page).offset(@page*per_page) unless all?
-    redirect_to posts_path(params.permit(:q)) if @products.empty?
+    redirect_to posts_path(params.permit(:q)) if @products.empty? unless params[:q].blank?
     respond_to do |format|
       format.html
       format.js

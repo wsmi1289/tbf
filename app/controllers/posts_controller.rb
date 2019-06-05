@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   def index
     @posts = SearchService.new(Post, params, current_user.id).search
     @posts = @posts.limit(per_page).offset(@page*per_page) unless all?
-    redirect_to products_path(params.permit(:q)) if @posts.empty?
+    redirect_to products_path(params.permit(:q)) if @posts.empty? unless params[:q].blank?
   end
 
   def show
