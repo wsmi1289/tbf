@@ -7,13 +7,13 @@ class ApplicationController < ActionController::Base
     end
   
     def admin?
-      unless current_user.try(:admin)
+      unless current_user.admin?
         redirect_to two_barn_farm_path
       end
     end
 
     def client?
-      unless current_user.try(:client) || current_user.try(:admin)
+      unless current_user.client? || current_user.admin?
         redirect_to two_barn_farm_path
       end
     end

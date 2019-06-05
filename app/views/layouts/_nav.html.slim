@@ -22,9 +22,9 @@ nav.navbar.navbar-light.navbar-expand-md.mb-3.tan
 									a.dropdown-item href="/tbf/#{page.slug}" = page.name
 								.dropdown-divider
 								- if user_signed_in?
-									- if current_user.try(:admin?)
+									- if current_user.admin?
 										a.dropdown-item href=admin_index_path Admin
-									- if current_user.try(:client?) || current_user.try(:admin?)
+									- if current_user.client? || current_user.admin?
 										a.dropdown-item href=products_path Products
 									a.dropdown-item href=user_path(current_user) Account
 									= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'dropdown-item'
