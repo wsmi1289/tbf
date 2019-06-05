@@ -6,13 +6,13 @@ class ApplicationController < ActionController::Base
       params[:all] == 'true'
     end
   
-    def :current_user_admin?
+    def current_user_admin?
       unless current_user.admin?
         redirect_to two_barn_farm_path
       end
     end
 
-    def :current_user_client?
+    def current_user_client?
       unless current_user.client? || current_user.admin? ||
         current_user.root?
         redirect_to two_barn_farm_path
