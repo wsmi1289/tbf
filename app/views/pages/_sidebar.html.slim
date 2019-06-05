@@ -1,5 +1,5 @@
 .card
-  - if current_user.try(:admin)
+  - if current_user.admin?
   	.card-header
     	.center
 				a.btn.btn-light href=new_side_bar_content_path({page_id: @page.id}) Add Content

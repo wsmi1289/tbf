@@ -1,4 +1,4 @@
 tr
   td = user.email
-  td = user.admin
-  td = check_box_tag('client', "true", user.client, data: { id: user.id, remote: true, url: admin_path(user.id), method: "PUT" })
+  td = user.admin?
+  td = check_box_tag('client', "true", user.client?, data: { id: user.id, remote: true, url: admin_path(user.id), method: "PUT" })

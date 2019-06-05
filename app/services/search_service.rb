@@ -9,7 +9,7 @@ class SearchService
     @models = @model.all
     @models = filter_models if @params.key?(:filter)
     @models = find_models if @params.key?(:q)
-    @models = @models.try(:in_stock) || @models if @current_user.try(:client)
+    @models = @models.try(:in_stock) || @models if @current_user.client?
     sort_models
   end
 
