@@ -1,6 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:edit, :update, :destroy]
-  before_action :admin?
+  before_action :current_user_admin?
 
   def index
     @categories = Category.all

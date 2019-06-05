@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
   before_action :set_page, only: [:index]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :set_cart
-  before_action :client?
+  before_action :current_user_client?
 
   def index
     @products = SearchService.new(Product, params, current_user.id).search
