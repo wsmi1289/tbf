@@ -2,7 +2,6 @@
   .col-md-10.offset-md-1
     h1 Editing Product
     = render 'form'
-
-= link_to 'Show', @product, class: "links"
-|  | 
-= link_to 'Back', products_path, class: "links"
+.mt-3
+	= link_to 'Show', @product, class: 'btn btn-lg btn-light mr-3'
+	= link_to 'Back', products_path, class: 'btn btn-lg btn-light'
