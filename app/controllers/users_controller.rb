@@ -11,7 +11,6 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       user_params[:image].present? ?
         render(:crop) : redirect_to(@user, notice: 'Success.')
-      end
     else
       render :edit
     end
