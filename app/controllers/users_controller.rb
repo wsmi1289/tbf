@@ -9,10 +9,8 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      if user_params[:image].present?
-        render :crop
-      else
-        redirect_to @user, notice: 'User was successfully updated.'
+      user_params[:image].present? ?
+        render(:crop) : redirect_to(@user, notice: 'Success.')
       end
     else
       render :edit

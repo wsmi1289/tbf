@@ -26,11 +26,8 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     if @product.save
-      if product_params[:image].present?
-        render :crop
-      else
-        redirect_to products_path, notice: 'Product was successfully created.'
-      end
+      product_params[:image].present? ?
+        render(:crop) : redirect_to(products_path, notice: 'Success.')
     else
       render :new
     end
@@ -38,11 +35,8 @@ class ProductsController < ApplicationController
 
   def update
     if @product.update(product_params)
-      if product_params[:image].present?
-        render :crop
-      else
-        redirect_to products_path, notice: 'Product was successfully updated.'
-      end
+      product_params[:image].present? ?
+        render(:crop) : redirect_to(products_path, notice: 'Success.')
     else
       render :edit
     end
