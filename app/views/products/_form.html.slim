@@ -13,8 +13,9 @@
     = f.label :description
     = f.text_area :description, class: 'form-control form-control-lg'
   .form-group
-    = f.label :image, "Add an image"
-    = f.file_field :image, class: 'form-control-file form-control-lg'
+    .custom-file.col-sm-4
+      = f.file_field :image, class: 'form-control-file form-control-lg custom-file-input'
+      = f.label :image, "Add an image", class: 'custom-file-label lead font-weight-bold'
   .row
     .form-group.col
       = f.label :price

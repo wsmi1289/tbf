@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   include PaginationHelper
+  include FormHelper
   before_action :set_page, only: [:index]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 

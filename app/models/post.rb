@@ -9,9 +9,9 @@ class Post < ActiveRecord::Base
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
   after_update :crop_image
   enum title_position: {
-    left_top: 0, right_top: 1, center_top: 2,
-    left_middle: 3, right_middle: 4, center_middle: 5,
-    left_bottom: 6, right_bottom: 7, center_bottom: 8 }
+    top_left: 0, top_right: 1, top_center: 2,
+    center_left: 3, center_right: 4, center: 5,
+    bottom_left: 6, bottom_right: 7, bottom_center: 8 }
   has_many :comments, dependent: :destroy
   validates :title, presence: true, length: {minimum: 5}
   validates :body, presence: true
