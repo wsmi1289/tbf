@@ -8,7 +8,7 @@ class AdminController < ApplicationController
   def update
     @user = User.find(params[:id])
     respond_to do |format|
-      if @user.update_attribute(:client, params[:client])
+      if @user.update_attribute(:role, params[:client])
         format.html { render :index, notice: 'Product was successfully created.' }
         format.js
         format.json { render :show, status: :created, location: @product }

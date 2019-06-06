@@ -13,8 +13,9 @@
     = form.label :title
     = form.text_field :title, class: 'form-control form-control-lg'
   .form-group
-    = form.label :image, "Add an Image"
-    = form.file_field :image, class: 'form-control-file form-control-lg'
+    .custom-file.col-sm-4
+      = f.file_field :image, class: 'form-control-file form-control-lg custom-file-input'
+      = f.label :image, "Add an image", class: 'custom-file-label lead font-weight-bold'
   .form-group
     = form.label :content
     = form.text_area :content, 'data-provider': :summernote, class: 'form-control form-control-lg'

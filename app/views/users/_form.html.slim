@@ -6,10 +6,9 @@
       ul
       - @user.errors.full_messages.each do |message|
         li = message
-
   .form-group
-    = f.label :image, "Add an image"
-    = f.file_field :image, class: 'form-control-file form-control-lg'
-
+    .custom-file.col-sm-4
+      = f.file_field :image, class: 'form-control-file form-control-lg custom-file-input'
+      = f.label :image, "Add an image", class: 'custom-file-label lead font-weight-bold'
   .actions
     = f.submit "Update", class: 'btn btn-light btn-lg btn-block'

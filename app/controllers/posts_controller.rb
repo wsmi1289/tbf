@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   include PaginationHelper
+  include FormHelper
   before_action :set_page, only: [:index]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
@@ -23,11 +24,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
 
     if @post.save
-      if post_params[:image].present?
-        render :crop
-      else
-        redirect_to @post
-      end
+      post_params[:image].present? ? render(:crop) : redirect_to(@post)
     else
       render :new
     end
@@ -35,11 +32,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      if post_params[:image].present?
-        render :crop
-      else
-        redirect_to @post
-      end
+      post_params[:image].present? ? render(:crop) : redirect_to(@post)
     else
       render :edit
     end

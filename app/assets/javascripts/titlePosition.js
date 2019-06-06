@@ -1,30 +1,30 @@
 titlePosition = function (position, postTitle) {
 	switch(position) {
-		case "left_top":
+		case "top_left":
 			postTitle.addClass('left');
 			break;
-		case "right_top":
+		case "top_right":
 			postTitle.addClass('right');
 			break;
-		case "center_top":
+		case "top_center":
 			postTitle.addClass('center');
 			break;
-		case "left_middle":
+		case "center_left":
 			postTitle.addClass('left mt-5');
 			break;
-		case "right_middle":
+		case "center_right":
 			postTitle.addClass('right mt-5');
 			break;
-		case "center_middle":
+		case "ccenter":
 			postTitle.addClass('center mt-5');
 			break;
-		case "left_bottom":
+		case "bottom_left":
 			postTitle.addClass('left mt-5 pt-5');
 			break;
-		case "right_bottom":
+		case "bottom_right":
 			postTitle.addClass('right mt-5 pt-5');
 			break;
-		case "center_bottom":
+		case "bottom_center":
 			postTitle.addClass('center mt-5 pt-5');
 			break;
 		default:

@@ -7,17 +7,19 @@
       ul
         - @post.errors.full_messages.each do |message|
           li = message
+  .form-group.row
+    .col-sm-4
+      = f.text_field :title, placeholder: 'Title', class: 'form-control form-control-lg'
+    .col-sm-4
+      .custom-file
+        = f.file_field :image, class: 'form-control-file form-control-lg custom-file-input'
+        = f.label :image, "Add an Image", class: 'custom-file-label lead font-weight-bold'
+    = f.label "Position Title", class: 'col-sm-1 text-nowrap lead font-weight-bold px-0 mt-2'
+    .col-sm-3.pl-5
+      = f.select(:title_position, title_positions(@post.title_position), {}, class: 'form-control form-control-lg pl-5')
 
   .form-group
-    = f.label :image, "Add an Image"
-    = f.file_field :image, class: 'form-control-file form-control-lg'
-  = render 'posts/title_form', f: f
-  .form-group
-    = f.label :title
-    = f.text_field :title, class: 'form-control form-control-lg'
-
-  .form-group
-    = f.label :body
+    = f.label :body, class: 'lead font-weight-bold'
     = f.text_area :body, 'data-provider': :summernote, class: 'form-control form-control-lg'
   .actions.mt-3
     = f.submit "Post", class: 'btn btn-light btn-lg btn-block'

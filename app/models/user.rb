@@ -4,7 +4,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :comments
-  mount_uploader :image, ImageUploader
   enum role: { root: 0, admin: 1, client: 2, user: 3 }
-  # validates :image, presence: true
+
+  # image upload
+  mount_uploader :image, ImageUploader
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+  validates :image, presence: true
+  after_update :crop_image
+
+  def crop_image
+    image.recreate_versions! if crop_x.present?
+  end
 end

@@ -8,14 +8,12 @@ class UsersController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'Post was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+    if @user.update(user_params)
+      user_params[:image].present? ?
+        render(:crop) : redirect_to(@user, notice: 'Success.')
       end
+    else
+      render :edit
     end
   end
 

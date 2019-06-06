@@ -6,21 +6,23 @@
       ul
         - @product.errors.full_messages.each do |message|
           li = message
+  .form-group.row
+    .col-sm-6
+      = f.text_field :title, placeholder: 'Title', class: 'form-control form-control-lg'
+    .col-sm-6
+      .custom-file
+        = f.file_field :image, class: 'form-control-file form-control-lg custom-file-input'
+        = f.label :image, "Add an Image", class: 'custom-file-label lead font-weight-bold'
+
   .form-group
-    = f.label :title
-    = f.text_field :title, class: 'form-control form-control-lg'
-  .form-group
-    = f.label :description
+    = f.label :description, class: 'lead'
     = f.text_area :description, class: 'form-control form-control-lg'
-  .form-group
-    = f.label :image, "Add an image"
-    = f.file_field :image, class: 'form-control-file form-control-lg'
+
   .row
     .form-group.col
-      = f.label :price
-      = f.text_field :price, class: 'form-control-file form-control-lg'
+      = f.text_field :price, placeholder: 'Price', class: 'form-control-file form-control-lg'
     .form-group.col
-      = f.label :category_id
-      = f.collection_select :category_id, Category.all, :id, :name, {prompt: true}, {class: 'form-control form-control-lg'}
+      = f.collection_select :category_id, Category.all, :id, :name, {prompt: 'Choose Category'}, {class: 'form-control form-control-lg'}
+
   .actions
     = f.submit class: 'btn btn-light btn-lg btn-block'
