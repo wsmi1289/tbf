@@ -1,0 +1,3 @@
+class CropsController < ApplicationController
+
+end

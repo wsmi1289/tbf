@@ -1,4 +1,4 @@
-class Post < ActiveRecord::Base
+class Post < ApplicationRecord
   include PgSearch
   pg_search_scope :search_scope, against: {
     title: 'A',

@@ -1,4 +1,4 @@
-class Page < ActiveRecord::Base
+class Page < ApplicationRecord
   enum sidebar_status: {
     hide_sidebar: 0,
     left_sidebar: 1,

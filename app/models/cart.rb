@@ -1,4 +1,4 @@
-class Cart < ActiveRecord::Base
+class Cart < ApplicationRecord
   has_many :line_items, dependent: :destroy
   def add_product(product_id, quantity)
     current_item = line_items.find_by(product_id: product_id)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_05_222117) do
+ActiveRecord::Schema.define(version: 2019_06_10_011004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,18 @@ ActiveRecord::Schema.define(version: 2019_06_05_222117) do
     t.bigint "user_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "crops", force: :cascade do |t|
+    t.text "name"
+    t.text "family"
+    t.boolean "transplanted"
+  end
+
+  create_table "fields", force: :cascade do |t|
+    t.string "name"
+    t.integer "length"
+    t.integer "width"
   end
 
   create_table "line_items", force: :cascade do |t|
@@ -60,6 +72,16 @@ ActiveRecord::Schema.define(version: 2019_06_05_222117) do
     t.datetime "updated_at", null: false
     t.integer "sidebar_status", default: 0
     t.integer "link_position", default: 0
+  end
+
+  create_table "plantings", force: :cascade do |t|
+    t.date "seeded_at"
+    t.date "transplanted_at"
+    t.date "harvested_at"
+    t.bigint "field_id"
+    t.bigint "crop_id"
+    t.index ["crop_id"], name: "index_plantings_on_crop_id"
+    t.index ["field_id"], name: "index_plantings_on_field_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -114,4 +136,6 @@ ActiveRecord::Schema.define(version: 2019_06_05_222117) do
   end
 
   add_foreign_key "line_items", "products"
+  add_foreign_key "plantings", "crops"
+  add_foreign_key "plantings", "fields"
 end
