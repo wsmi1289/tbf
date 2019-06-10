@@ -2,9 +2,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   private
-    def all?
-      params[:all] == 'true'
-    end
   
     def current_user_admin?
       unless current_user.admin?

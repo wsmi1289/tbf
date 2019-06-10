@@ -1,16 +1,10 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:edit, :update, :destroy]
+  before_action :set_category, only: [:destroy]
   before_action :current_user_admin?
 
   def index
     @categories = Category.all
-  end
-
-  def new
     @category = Category.new
-  end
-
-  def edit
   end
 
   def create
@@ -21,18 +15,6 @@ class CategoriesController < ApplicationController
         format.html { redirect_to categories_url, notice: 'Category was successfully created.' }
       else
         format.html { render :new }
-      end
-    end
-  end
-
-  def update
-    respond_to do |format|
-      if @category.update(category_params)
-        format.html { redirect_to categories_url, notice: 'category was successfully updated.' }
-        format.json { render :show, status: :ok, location: @category }
-      else
-        format.html { render :edit }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end
   end

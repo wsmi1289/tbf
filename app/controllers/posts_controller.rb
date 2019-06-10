@@ -5,9 +5,9 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    @posts = SearchService.new(Post, params, current_user.id).search
-    @posts = @posts.limit(per_page).offset(@page*per_page) unless all?
-    redirect_to products_path(params.permit(:q)) if @posts.empty? unless params[:q].blank?
+    svc = SearchService.new(Post, params, current_user.id)
+    @posts = paginate(svc.search)
+    search_products if @posts.empty?
   end
 
   def show
@@ -24,7 +24,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
 
     if @post.save
-      post_params[:image].present? ? render(:crop) : redirect_to(@post)
+      handle_image_cropping
     else
       render :new
     end
@@ -32,7 +32,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      post_params[:image].present? ? render(:crop) : redirect_to(@post)
+      handle_image_cropping
     else
       render :edit
     end
@@ -47,9 +47,18 @@ class PostsController < ApplicationController
   end
 
   private
+    def handle_image_cropping
+      post_params[:image].present? ?
+        render(:crop) : redirect_to(@post, notice: 'Success.')
+    end
 
     def post_params
       params.require(:post).permit(:title, :body, :image, :crop_x, :crop_y, :crop_w, :crop_h, :title_position)
+    end
+
+    def search_products
+      svc = SearchService.new(Product, params, current_user.id)
+      redirect_to products_path(params.permit(:q)) if svc.search.any?
     end
 
     def set_post

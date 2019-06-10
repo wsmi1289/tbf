@@ -26,3 +26,8 @@
 
   .actions
     = f.submit class: 'btn btn-light btn-lg btn-block'
+
+javascript:
+  $(function () {
+    tbfEvent.showImageName("#{@product.image}");
+  });

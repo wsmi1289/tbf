@@ -24,6 +24,17 @@ var tbfEvent = {
 			$('.all-comments').toggleClass('hidden');
 			ws('.view-all-comments').toggleText('View All', 'Hide');
 		})
-	}
+	},
+
+	showImageName: function (imagePath) {
+		$('.custom-file-input').on('change', function () {
+	    var fileName = $(this).val().split('\\').pop();
+	    $(this).next('.custom-file-label').text(fileName);
+		});
+		if (imagePath.length) {
+			var fileName = imagePath.split('/').pop();
+			$('.custom-file-label').text(fileName);
+		}
+	},
 }
 

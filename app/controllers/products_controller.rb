@@ -6,13 +6,10 @@ class ProductsController < ApplicationController
   before_action :current_user_client?
 
   def index
-    @products = SearchService.new(Product, params, current_user.id).search
-    @products = @products.limit(per_page).offset(@page*per_page) unless all?
-    redirect_to posts_path(params.permit(:q)) if @products.empty? unless params[:q].blank?
-    respond_to do |format|
-      format.html
-      format.js
-    end
+    svc = SearchService.new(Product, params, current_user.id)
+    @products = paginate(svc.search)    
+    
+    search_posts if @products.empty?
   end
 
   def new
@@ -26,8 +23,7 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     if @product.save
-      product_params[:image].present? ?
-        render(:crop) : redirect_to(products_path, notice: 'Success.')
+      handle_image_cropping
     else
       render :new
     end
@@ -35,8 +31,9 @@ class ProductsController < ApplicationController
 
   def update
     if @product.update(product_params)
-      product_params[:image].present? ?
-        render(:crop) : redirect_to(products_path, notice: 'Success.')
+      handle_image_cropping
+      # product_params[:image].present? ?
+      #   render(:crop) : redirect_to(products_path, notice: 'Success.')
     else
       render :edit
     end
@@ -52,11 +49,21 @@ class ProductsController < ApplicationController
 
   private
 
+    def handle_image_cropping
+      product_params[:image].present? ?
+        render(:crop) : redirect_to(products_path, notice: 'Success.')
+    end
+
     def product_params
       params.require(:product).permit(:title, :description, :category_id, :price, :image, :in_stock, :crop_x, :crop_y, :crop_w, :crop_h)
     end
 
     def set_product
       @product = Product.find(params[:id])
+    end
+
+    def search_posts
+      svc = SearchService.new(Post, params, current_user.id)
+      redirect_to posts_path(params.permit(:q)) if svc.search.any?
     end
 end

@@ -20,7 +20,7 @@ javascript:
 		var height = parseInt($('#product-cropbox').height())-100;
 		$('#product-cropbox').Jcrop({
 			aspectRatio: 1,
-			setSelect: [50, 50, width, height],
+			setSelect: [200, 200, width, height],
 			onChange: updatePreview,
 			onSelect: updatePreview,
 		});
@@ -36,12 +36,10 @@ javascript:
 		function showPreview (coords) {
 			var rx = 200 / coords.w;
 			var ry = 200 / coords.h;
-			var w = $('#product-cropbox').width();
-			var h = $('#product-cropbox').height();
 
 			$('#product-preview').css({
-				width: Math.round(rx * w) + 'px',
-				height: Math.round(ry * h) + 'px',
+				width: Math.round(rx * $('#product-cropbox').width()) + 'px',
+				height: Math.round(ry * $('#product-cropbox').height()) + 'px',
 				marginLeft: '-' + Math.round(rx * coords.x) + 'px',
 				marginTop: '-' + Math.round(ry * coords.y) + 'px'
 			});

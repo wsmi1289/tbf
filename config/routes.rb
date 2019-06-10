@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   
   resources :users, only: [:index, :show, :update]
   resources :admin, only: [:index, :update]
-  resources :categories
+  resources :categories, only: [:index, :create, :destroy]
   resources :comments, only: [:index, :new, :create, :destroy]
   resources :posts
   resource :checkouts, only: [:new, :create]

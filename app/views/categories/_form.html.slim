@@ -6,8 +6,8 @@
       ul
       - @category.errors.full_messages.each do |message|
         li = message
-  .field
-    = form.label :name
-    = form.text_field :name, id: :category_name
-  .actions
-    = form.submit
+  .form-group.row
+    .col-sm-3
+      = form.text_field :name, id: :category_name, placeholder: 'Name', class: 'form-control form-control-lg'
+    .col-sm-3
+      = form.submit class: 'btn btn-light btn-lg btn-block'

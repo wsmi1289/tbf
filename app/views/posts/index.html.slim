@@ -4,8 +4,11 @@
   .col-md-2
     - if current_user.admin?
       = link_to 'New Post', new_post_path, class: 'btn btn-lg btn-light'
-- @posts.each do |post|
-  = render 'posts/post', post: post
+- if @posts.empty?
+  p Sorry, no posts match your search
+- else
+  - @posts.each do |post|
+    = render 'posts/post', post: post
 br
 - unless no_back?
   = link_to 'Back', posts_path({page: @page-1}), class: 'btn'
