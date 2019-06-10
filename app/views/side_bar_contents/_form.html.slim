@@ -25,3 +25,8 @@
   = form.hidden_field :page_id, value: params[:page_id]
   .actions
     = form.submit
+
+javascript:
+  $(function () {
+    tbfEvent.showImageName("#{side_bar_content.image}");
+  });

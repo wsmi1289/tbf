@@ -1,4 +1,7 @@
 .search-form.mt-5
   = form_tag(path, method: "get") do
-    = text_field_tag :q, nil, placeholder: 'Search'
-    = submit_tag("Search", class: 'btn btn-light ml-3')
+    .form-group.row
+    	.col-sm-3
+    		= text_field_tag :q, nil, placeholder: 'Search', class: 'form-control'
+    	.col-sm-3
+    		= submit_tag("Search", class: 'btn btn-light ml-3')

@@ -1,6 +1,8 @@
+- if products.empty?
+  p Sorry, no products match your search
 - products.each do |product|
   .card.flex.mb-3 style="width: 18rem;"
-    = image_tag(product.image_url(:thumb), class: "card-img-top")
+    = image_tag(product.image.thumb.url, class: "card-img-top")
     .card-body
       .d-flex.justify-content-around
         h4.p2 = product.title
@@ -11,7 +13,7 @@
         .mx-3
           = form_tag(line_items_path(product_id: product.id), remote: true) do
             .input-group
-              = number_field_tag :quantity, {}, placeholder: "Quantity", class: "form-control"
+              = number_field_tag :quantity, {}, min: 1, placeholder: "Quantity", class: "form-control"
               .input-group-append
                 = submit_tag 'Add to cart', class: 'btn btn-outline-secondary'
     - if current_user.admin?

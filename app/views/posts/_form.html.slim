@@ -23,3 +23,8 @@
     = f.text_area :body, 'data-provider': :summernote, class: 'form-control form-control-lg'
   .actions.mt-3
     = f.submit "Post", class: 'btn btn-light btn-lg btn-block'
+
+javascript:
+  $(function () {
+    tbfEvent.showImageName("#{@post.image}");
+  });

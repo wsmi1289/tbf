@@ -1,4 +1,12 @@
 module PaginationHelper
+  def all?
+    params[:all] == 'true'
+  end
+    
+  def paginate(models)
+    models.limit(per_page).offset(@page*per_page) unless all?
+  end
+
   def per_page
     10
   end
