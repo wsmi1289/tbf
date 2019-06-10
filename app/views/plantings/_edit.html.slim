@@ -1,0 +1,13 @@
+
+button.btn.btn-light.toggle-planting data-id="#{planting.id}" = planting.crop.name
+.planting-form.hidden data-id="#{planting.id}"
+	= render 'plantings/form', planting: planting
+
+javascript:
+	$(function () {
+		$('.toggle-planting').on('click', function (e) {
+			var id = e.currentTarget.dataset['id'];
+			$(".planting-form[data-id='"+id+"']").removeClass('hidden');
+			$(".toggle-planting[data-id='"+id+"']").addClass('hidden');
+		})
+	})

@@ -1,0 +1,25 @@
+.mt-3
+  = form_for(@field) do |f|
+    - if @field.errors.any?
+      #error_explanation
+        h2 #{pluralize(@field.errors.count, "error")} prohibited this comment from being saved:
+
+        ul
+        - @field.errors.full_messages.each do |message|
+          li = message
+    .row
+      .col
+        .form-group
+          = f.text_field :name, placeholder: 'Name', class: 'form-control form-control-sm'
+      .col
+        .form-group
+          = f.number_field :length, placeholder: 'Length', class: 'form-control form-control-sm'
+      .col
+        .form-group
+          = f.number_field :width, placeholder: 'Width', class: 'form-control form-control-sm'
+      .col
+        .form-group
+          = f.number_field :num_rows, placeholder: 'Row Count', value: @field.num_beds, class: 'form-control form-control-sm'
+      .col
+        .actions
+          = f.submit class: "btn btn-sm btn-primary"

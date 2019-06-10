@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_10_011004) do
+ActiveRecord::Schema.define(version: 2019_06_10_040725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "beds", force: :cascade do |t|
+    t.bigint "field_id"
+    t.bigint "planting_id"
+    t.index ["field_id"], name: "index_beds_on_field_id"
+    t.index ["planting_id"], name: "index_beds_on_planting_id"
+  end
 
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -39,12 +46,15 @@ ActiveRecord::Schema.define(version: 2019_06_10_011004) do
     t.text "name"
     t.text "family"
     t.boolean "transplanted"
+    t.decimal "row_spacing", precision: 5, scale: 2
+    t.decimal "plant_spacing", precision: 5, scale: 2
   end
 
   create_table "fields", force: :cascade do |t|
     t.string "name"
     t.integer "length"
     t.integer "width"
+    t.integer "num_beds"
   end
 
   create_table "line_items", force: :cascade do |t|
@@ -80,6 +90,8 @@ ActiveRecord::Schema.define(version: 2019_06_10_011004) do
     t.date "harvested_at"
     t.bigint "field_id"
     t.bigint "crop_id"
+    t.decimal "num_beds", precision: 5, scale: 2
+    t.integer "bed_width"
     t.index ["crop_id"], name: "index_plantings_on_crop_id"
     t.index ["field_id"], name: "index_plantings_on_field_id"
   end
@@ -135,6 +147,8 @@ ActiveRecord::Schema.define(version: 2019_06_10_011004) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "beds", "fields"
+  add_foreign_key "beds", "plantings"
   add_foreign_key "line_items", "products"
   add_foreign_key "plantings", "crops"
   add_foreign_key "plantings", "fields"

@@ -1,0 +1,39 @@
+.mt-3
+  h3 = planting_name(planting)
+  = form_for(planting) do |f|
+    - if planting.errors.any?
+      #error_explanation
+        h2 #{pluralize(planting.errors.count, "error")} prohibited this comment from being saved:
+
+        ul
+        - planting.errors.full_messages.each do |message|
+          li = message
+    = f.hidden_field :field_id, value: @field.id
+    .row
+      .col
+        .form-group
+          = f.collection_select :crop_id, Crop.all, :id, :name, prompt: 'Select Crop', class: 'form-control form-control-sm'
+      .col
+        .form-group
+          = f.number_field :num_beds, step: 0.1, placeholder: 'Bed Count', class: 'form-control form-control-sm'
+      .col
+        .form-group
+          = f.number_field :bed_width, placeholder: 'Bed Width', value: planting.num_beds, class: 'form-control form-control-sm'
+    .row
+      .col
+        .form-group
+          = f.label 'Seeding Date'
+          br
+          = f.date_select :seeded_at, selected: Date.today, class: 'form-control form-control-sm'
+      .col
+        .form-group
+          = f.label 'Transplanting Date'
+          br
+          = f.date_select :transplanted_at, selected: Date.today, class: 'form-control form-control-sm'
+      .col
+        .form-group
+          = f.label 'Harvest Date'
+          br
+          = f.date_select :harvested_at, selected: Date.today, class: 'form-control form-control-sm'
+    .actions
+      = f.submit class: "btn btn-sm btn-primary"

@@ -15,6 +15,10 @@ Rails.application.routes.draw do
   resources :carts, except: [:index]
   resources :pages, path: :tbf
   resources :products
+  resources :crops
+  resources :fields
+  resources :plantings
+
 
 
   root 'landings#two_barn_farm', as: 'tbf'
