@@ -1,4 +1,4 @@
-class Row < ApplicationRecord
+class Bed < ApplicationRecord
   belongs_to :field
   belongs_to :planting
 end

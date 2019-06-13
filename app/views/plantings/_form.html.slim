@@ -15,10 +15,12 @@
           = f.collection_select :crop_id, Crop.all, :id, :name, prompt: 'Select Crop', class: 'form-control form-control-sm'
       .col
         .form-group
+          = f.label 'Beds'
           = f.number_field :num_beds, step: 0.1, placeholder: 'Bed Count', class: 'form-control form-control-sm'
       .col
         .form-group
-          = f.number_field :bed_width, placeholder: 'Bed Width', value: planting.num_beds, class: 'form-control form-control-sm'
+          = f.label 'Bed Width'
+          = f.number_field :bed_width, placeholder: 'Bed Width', class: 'form-control form-control-sm'
     .row
       .col
         .form-group

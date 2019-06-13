@@ -1,10 +1,11 @@
 h1 Editing Field
 
 = render 'fields/form'
-= render 'plantings/form', planting: Planting.new
 
 - @field.plantings.each do |planting|
 	= render 'plantings/edit', planting: planting
+= render 'plantings/form', planting: Planting.new
+
 
 .mt-3
 	= link_to 'Back', fields_path, class: 'btn btn-lg btn-light'

@@ -16,8 +16,8 @@ Rails.application.routes.draw do
   resources :pages, path: :tbf
   resources :products
   resources :crops
-  resources :fields
-  resources :plantings
+  resources :fields, except: [:new]
+  resources :plantings, only: [:create, :update]
 
 
 

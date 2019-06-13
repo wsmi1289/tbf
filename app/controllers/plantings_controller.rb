@@ -2,6 +2,7 @@ class PlantingsController < ApplicationController
   def create
     @planting = Planting.new(planting_params)
     if @planting.save
+      BedCreationService.new(@planting.id).create
       redirect_to fields_path, notice: 'Success'
     else
       redirect_to edit_field_path(planting_params[:field_id]), notice: 'Error'

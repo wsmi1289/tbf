@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_10_040725) do
+ActiveRecord::Schema.define(version: 2019_06_10_062618) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2019_06_10_040725) do
   create_table "beds", force: :cascade do |t|
     t.bigint "field_id"
     t.bigint "planting_id"
+    t.decimal "percent_used", precision: 5, scale: 2
     t.index ["field_id"], name: "index_beds_on_field_id"
     t.index ["planting_id"], name: "index_beds_on_planting_id"
   end
