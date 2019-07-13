@@ -1,4 +1,8 @@
-h1 Fields
+.row
+	.col-10
+		h1 Fields
+	.col-2
+		= link_to 'New Crop', new_crop_path, class: 'btn btn-lg btn-light'
 - @fields.each do |field|
 	= render 'fields/field', field: field
 = render 'form'

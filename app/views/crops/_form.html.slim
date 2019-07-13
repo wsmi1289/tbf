@@ -1,0 +1,31 @@
+.mt-3
+  = form_for(@crop) do |f|
+    - if @crop.errors.any?
+      #error_explanation
+        h2 #{pluralize(@crop.errors.count, "error")} prohibited this comment from being saved:
+
+        ul
+        - @crop.errors.full_messages.each do |message|
+          li = message
+    .row
+      .col
+        .form-group
+          = f.text_field :name, placeholder: 'Name', class: 'form-control form-control-sm'
+      .col
+        .form-group
+          = f.text_field :family, placeholder: 'Family', class: 'form-control form-control-sm'
+      .col
+        .form-group
+          .form-check.form-check-inline
+          = f.check_box :transplanted, class: 'form-check-input'
+          = f.label :transplanted, class: 'form-check-label'
+    .row
+      .col
+        .form-group
+          = f.number_field :row_spacing, step: 0.1, placeholder: 'Row Spacing', class: 'form-control form-control-sm'
+      .col
+        .form-group
+          = f.number_field :plant_spacing, step: 0.1, placeholder: 'Plant Spacing', class: 'form-control form-control-sm'
+      .col
+        .actions
+          = f.submit class: "btn btn-sm btn-primary"
