@@ -18,13 +18,13 @@
 			label for="date" Date range:
 javascript:
 	$(function () {
-
     var today = new Date(),
-          day = today.getDate(),
+        day = today.getDate(),
         month = today.getMonth(),
-         year = today.getFullYear(),
-       future = today.setFullYear(year, month+8, day),
-          now = today.setFullYear(year, month-2, day);
+        year = today.getFullYear(),
+        future = today.setFullYear(year, month+8, day),
+        now = today.setFullYear(year, month-2, day);
+
     $(".slider-#{field.id}").slider({
       range: true,
       min: now,
@@ -32,33 +32,24 @@ javascript:
       values: [ now, future ],
       slide: function( event, ui ) {
         $( "#date-#{field.id}" ).html(
-          "Start: " + dateConvert(ui.values[ 0 ]) +
-          " - End: " + dateConvert(ui.values[ 1 ])
+          "Start: " + new Date(ui.values[0]).toDateString().substring(4) +
+          " - End: " + new Date(ui.values[1]).toDateString().substring(4)
         );
         renderPlantings(ui);
       },
       stop: function(event, ui) {}
     });
 
-    var dateConvert = function (date) {
-      return new Date(date).toDateString().substring(4);
-    };
-
-    var matchCrop = function (crop) {
-      return this.crop_id === crop[0];
-    };
-
     var renderPlantings = function (ui) {
       _.each(#{raw field.plantings.to_json}, function (p) {
-        var start_date = new Date(p.transplanted_at).getTime(),
-              end_date = new Date(p.harvested_at).getTime(),
-              planting = $('.planting-hover[data-planting="'+ p.id +'"]');
+        var plantedAt = new Date(p.transplanted_at).getTime(),
+            harvestedAt = new Date(p.harvested_at).getTime(),
+            sliderStart = ui.values[0],
+            sliderEnd = ui.values[1],
+            plantingEl = $('.planting-hover[data-planting="'+ p.id +'"]');
 
-        if ((ui.values[0] <= end_date) && (ui.values[1] >= start_date)) {
-          planting.removeClass('hidden');
-        } else {
-          planting.addClass('hidden');
-        }
+        ((sliderStart <= harvestedAt) && (sliderEnd >= plantedAt)) ?
+          plantingEl.removeClass('hidden') : plantingEl.addClass('hidden');
       });
 
     };
