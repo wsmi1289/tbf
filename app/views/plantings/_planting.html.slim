@@ -1,7 +1,7 @@
-.planting-hover data-toggle="tooltip" data-placement="top" data-html="true" title=render('misc/planting_tooltip', planting: planting)
+.planting-hover data-planting="#{planting.id}" data-toggle="tooltip" data-placement="top" data-html="true" title=render('misc/planting_tooltip', planting: planting)
 	- planting.num_beds.to_i.times do |b|
 		.bed
-.bed style="width: #{bed_fraction(planting)}px"
+	.bed style="width: #{bed_fraction(planting)}px"
 
 javascript:
 	$(function () {

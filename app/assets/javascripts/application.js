@@ -12,8 +12,8 @@
 //
 //= require lodash
 //= require jquery3
-//= require jquery-ui
 //= require jquery_ujs
+//= require jquery-ui
 //= require jcrop
 //= require popper
 // = require bootstrap
