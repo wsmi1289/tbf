@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include FormatHelper
   protect_from_forgery with: :exception
 
   private

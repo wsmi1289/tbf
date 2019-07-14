@@ -1,11 +1,13 @@
 class PlantingsController < ApplicationController
+  include FieldHelper
   def create
     @planting = Planting.new(planting_params)
-    if @planting.save
+    if room_in_field? && @planting.save
       BedCreationService.new(@planting.id).create
       redirect_to fields_path, notice: 'Success'
     else
-      redirect_to edit_field_path(planting_params[:field_id]), notice: 'Error'
+      redirect_to edit_field_path(planting_params[:field_id]),
+        notice: 'Not enough beds in field'
     end
   end
   def update

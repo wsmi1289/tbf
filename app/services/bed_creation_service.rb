@@ -1,6 +1,9 @@
 class BedCreationService
+  include FieldHelper
+  
   def initialize(planting_id)
     @planting = Planting.find(planting_id)
+    @field = @planting.field
   end
 
   def create
