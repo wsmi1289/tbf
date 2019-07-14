@@ -11,11 +11,12 @@
 // about supported directives.
 //
 //= require lodash
-//= require jquery
+//= require jquery3
+//= require jquery-ui
 //= require jquery_ujs
 //= require jcrop
 //= require popper
-//= require bootstrap
+// = require bootstrap
 //= require summernote/summernote-bs4.min
 //= require activestorage
 //= require turbolinks

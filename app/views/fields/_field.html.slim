@@ -1,11 +1,79 @@
 .row
-	.col-md-1
+	.col.d-flex.justify-content-around
 		h3 = field.name
-	.col-md-1
+		h6.text-muted.mt-2 #{field.planted_beds} Beds
+	.col
 		= link_to 'Edit', edit_field_path(field), class: 'btn btn-lg btn-light'
-	.col-md-1
+	.col
 		= link_to 'Delete', field, method: :delete, class: 'btn btn-lg btn-light', data: { confirm: "Are You Sure?" }
+.row
 	.col-md-12.mt-3
 		.field id="field_#{field.id}" style="height: #{field.width}px; width: #{field.length}px;"
 			- field.plantings.each do |planting|
 				= render 'plantings/planting', planting: planting
+javascript:
+	$(function () {
+    $("#crop_selection").on('change', function(event) {
+      event.preventDefault();
+      var crop_id = $(this).children(":selected").attr("value");
+      var field_id = $('#field_id').val();
+      $.post('/fieldplanting', {crop_id: crop_id, id: field_id  }, function() {
+      });
+    });
+
+    var today = new Date(),
+          day = today.getDate(),
+        month = today.getMonth(),
+         year = today.getFullYear(),
+       future = today.setFullYear(year, month+8, day),
+          now = today.setFullYear(year, month-2, day);
+    $(".slider<%= field.id %>").slider({
+      range: true,
+      min: now,
+      max: future,
+      values: [ now, future ],
+      slide: function( event, ui ) {
+        $( "#date<%= field.id %>" ).html(
+          "Start: " + dateConvert(ui.values[ 0 ]) +
+          " - End: " + dateConvert(ui.values[ 1 ])
+        );
+        renderPlantings(ui);
+      },
+      stop: function(event, ui) {}
+    });
+
+    var dateConvert = function (date) {
+      return new Date(date).toDateString().substring(4);
+    };
+
+    var matchCrop = function (crop) {
+      return this.crop_id === crop[0];
+    };
+
+    var renderPlantings = function (ui) {
+      var plantings = <%= field.plantings.to_json.to_s.html_safe %>;
+      var crops = <%= @crops.to_json.to_s.html_safe %>;
+  
+      var data = plantings.map( function (p, i) {
+        var start_date = new Date(p.start).getTime(),
+              end_date = new Date(p.end).getTime(),
+                  crop = crops.find(matchCrop, p);
+      
+        console.log(crop);
+        if ((ui.values[0] <= end_date) && (ui.values[1] >= start_date)) {
+
+          return {
+            rows: p.num_rows,
+            length: <%= field.length %>,
+            crop: crop[1],
+            start: dateConvert(p.start),
+            end: dateConvert(p.end)
+          };
+        }
+      });
+      console.log(data);
+      var content = HandlebarsTemplates['planting']({plantings: data});
+      $('#current-planting<%= field.id %>').html(content);
+
+    };
+  });
