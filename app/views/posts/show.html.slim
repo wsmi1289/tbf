@@ -22,7 +22,7 @@
         = render @post.comments.last(3)
       .all-comments.hidden
         = render @post.comments
-    - if current_user.admin?
+    - if user_admin?
       = link_to 'Edit', edit_post_path(@post), class: 'btn btn-link'
       | |
       = link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-link'

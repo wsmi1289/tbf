@@ -13,5 +13,5 @@ h1.center.mt-3.mb-3 The Flower Smith
       p or call
       p <a href="tel:908-442-5128">(908)442-5128</a>,
       P if we can help with ready-made bouquets or flowers by the bunch or bucket for your event.
-      - if current_user.admin? || current_user.client?
+      - if user_client?
         = link_to 'Order Flowers', products_path, class: 'btn btn-light'

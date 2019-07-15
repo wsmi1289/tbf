@@ -16,7 +16,7 @@
               = number_field_tag :quantity, {}, min: 1, placeholder: "Quantity", class: "form-control"
               .input-group-append
                 = submit_tag 'Add to cart', class: 'btn btn-outline-secondary'
-    - if current_user.admin?
+    - if user_admin?
       .card-footer.text-center
         = link_to 'Delete', product, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-light' 
         = link_to 'Edit', edit_product_path(product), class: 'btn btn-light'

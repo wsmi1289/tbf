@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    svc = SearchService.new(Post, params, current_user.id)
+    svc = SearchService.new(Post, params, user_client?)
     @posts = paginate(svc.search)
     search_products if @posts.empty?
   end

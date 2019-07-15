@@ -37,10 +37,11 @@ Slider.prototype.renderPlantings = function (ui) {
     var plantedAt = new Date(p.transplanted_at).getTime(),
         harvestedAt = new Date(p.harvested_at).getTime(),
         plantingEl = $('.planting-hover[data-planting="'+ p.id +'"]'),
-        hiddenBeds = $('.hidden > .bed').length;
+        hiddenBeds = $('#field-'+this.fieldId+' > .hidden > .bed').length;
 
     ((ui.values[0] <= harvestedAt) && (ui.values[1] >= plantedAt)) ?
       plantingEl.removeClass('hidden') : plantingEl.addClass('hidden');
-    $('.bed-count').html(this.plantedBeds - hiddenBeds + ' Beds');
+    $('.bed-count[data-id="'+this.fieldId+'"]').html(
+      Math.ceil(this.plantedBeds - hiddenBeds) + ' Beds');
   }.bind(this));
 };

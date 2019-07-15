@@ -18,5 +18,5 @@
 	= sanitize(@page.content)
 - else
  = sanitize(@page.content)
-- if current_user.admin?
+- if user_admin?
   a.btn.btn-light.mt-2 href=edit_page_path(@page.slug) Edit Page

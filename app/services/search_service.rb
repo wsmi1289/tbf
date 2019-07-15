@@ -1,15 +1,15 @@
 class SearchService
-  def initialize(model, params, user_id)
+  def initialize(model, params, client)
     @model = model
     @params = params
-    @current_user = User.find(user_id)
+    @is_client = client
   end
 
   def search
     @models = @model.all
     @models = filter_models if @params.key?(:filter)
     @models = find_models if @params.key?(:q)
-    @models = @models.try(:in_stock) || @models if @current_user.client?
+    @models = @models.try(:in_stock) || @models if @is_client
     sort_models
   end
 

@@ -6,4 +6,12 @@ module ApplicationHelper
       'up' : 'down'
     link_to(title, store_path(sort: column, direction: direction))
   end
+
+  def user_admin?
+    user_signed_in? && current_user.admin?
+  end
+
+  def user_client?
+    user_signed_in? && current_user.client?
+  end
 end

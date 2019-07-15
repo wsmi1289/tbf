@@ -2,7 +2,7 @@
   .col-md-8.offset-md-2
     h1.center.mt-3.mb-3 Recent Posts
   .col-md-2
-    - if current_user.admin?
+    - if user_admin?
       = link_to 'New Post', new_post_path, class: 'btn btn-lg btn-light'
 - if @posts.empty?
   p Sorry, no posts match your search
