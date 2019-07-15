@@ -1,0 +1,13 @@
+.slide
+	div class="slider-#{field.id}"
+		.ui-slider-handle#left-handle
+		.ui-slider-handle#right-handle
+		.slider-line style="width: #{field.length-20}px;"
+	span id="date-#{field.id}"
+		label.date-label.mt-3 for="date" Date range:
+
+javascript:
+	$(function () {
+		var plantings = #{raw field.plantings.to_json},
+				slider = new Slider( #{field.id}, #{bed_count}, plantings ).init();
+  });

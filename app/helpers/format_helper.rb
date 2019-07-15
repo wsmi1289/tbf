@@ -1,5 +1,5 @@
 module FormatHelper
-  def day_month(date)
-    date.to_formatted_s(:short)
+  def d_m_y(date)
+    date.to_formatted_s(:long)
   end
 end
