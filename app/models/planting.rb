@@ -3,6 +3,7 @@ class Planting < ApplicationRecord
   # define_attribute_methods :num_beds
   belongs_to :field
   belongs_to :crop
+  belongs_to :year
   has_many :beds, dependent: :delete_all
   scope :in_field, -> (start, finish) { 
     where(

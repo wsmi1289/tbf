@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_08_020413) do
+ActiveRecord::Schema.define(version: 2019_08_08_044313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,8 +106,10 @@ ActiveRecord::Schema.define(version: 2019_08_08_020413) do
     t.bigint "crop_id"
     t.decimal "num_beds", precision: 5, scale: 2
     t.integer "bed_width"
+    t.bigint "year_id"
     t.index ["crop_id"], name: "index_plantings_on_crop_id"
     t.index ["field_id"], name: "index_plantings_on_field_id"
+    t.index ["year_id"], name: "index_plantings_on_year_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -161,10 +163,17 @@ ActiveRecord::Schema.define(version: 2019_08_08_020413) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "years", force: :cascade do |t|
+    t.date "start"
+    t.date "end"
+    t.integer "current", default: 2019
+  end
+
   add_foreign_key "beds", "fields"
   add_foreign_key "beds", "plantings"
   add_foreign_key "crops", "families"
   add_foreign_key "line_items", "products"
   add_foreign_key "plantings", "crops"
   add_foreign_key "plantings", "fields"
+  add_foreign_key "plantings", "years"
 end
