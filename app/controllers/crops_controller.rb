@@ -1,4 +1,6 @@
 class CropsController < ApplicationController
+  before_action :current_user_admin?
+  
   def new
     @crop = Crop.new
   end

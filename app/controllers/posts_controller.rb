@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   include FormHelper
   before_action :set_page, only: [:index]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :current_user_admin?, except: [:index, :show]
 
   def index
     svc = SearchService.new(Post, params, user_client?)

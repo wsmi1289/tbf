@@ -1,5 +1,7 @@
 class PlantingsController < ApplicationController
   include FieldHelper
+  before_action :current_user_admin?
+
   def create
     @planting = Planting.new(planting_params)
     if room_in_field? && @planting.save

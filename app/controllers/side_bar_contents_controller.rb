@@ -1,5 +1,6 @@
 class SideBarContentsController < ApplicationController
   before_action :set_side_bar_content, only: [:show, :edit, :update, :destroy]
+  before_action :current_user_admin?, except: [:show]
 
   # GET /side_bar_contents
   # GET /side_bar_contents.json
