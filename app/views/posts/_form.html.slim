@@ -16,7 +16,7 @@
         = f.label :image, "Add an Image", class: 'custom-file-label lead font-weight-bold'
     = f.label "Position Title", class: 'col-sm-1 text-nowrap lead font-weight-bold px-0 mt-2'
     .col-sm-3.pl-5
-      = f.select(:title_position, title_positions(@post.title_position), {}, class: 'form-control form-control-lg pl-5')
+      = f.select(:title_position, enum_options(@post, :title_position), {}, class: 'form-control form-control-lg pl-5')
 
   .form-group
     = f.label :body, class: 'lead font-weight-bold'

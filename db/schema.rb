@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_10_062618) do
+ActiveRecord::Schema.define(version: 2019_08_08_020413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,10 +45,23 @@ ActiveRecord::Schema.define(version: 2019_06_10_062618) do
 
   create_table "crops", force: :cascade do |t|
     t.text "name"
-    t.text "family"
     t.boolean "transplanted"
     t.decimal "row_spacing", precision: 5, scale: 2
     t.decimal "plant_spacing", precision: 5, scale: 2
+    t.bigint "family_id"
+    t.index ["family_id"], name: "index_crops_on_family_id"
+  end
+
+  create_table "families", force: :cascade do |t|
+    t.text "name"
+    t.integer "nitrogen", default: 0, null: false
+    t.integer "biomass", default: 0, null: false
+    t.integer "weed_competition", default: 0, null: false
+    t.integer "erosion", default: 0, null: false
+    t.integer "root_structure", default: 0, null: false
+    t.jsonb "preceding", default: {}, null: false
+    t.jsonb "succeeding", default: {}, null: false
+    t.jsonb "companions", default: {}, null: false
   end
 
   create_table "fields", force: :cascade do |t|
@@ -150,6 +163,7 @@ ActiveRecord::Schema.define(version: 2019_06_10_062618) do
 
   add_foreign_key "beds", "fields"
   add_foreign_key "beds", "plantings"
+  add_foreign_key "crops", "families"
   add_foreign_key "line_items", "products"
   add_foreign_key "plantings", "crops"
   add_foreign_key "plantings", "fields"

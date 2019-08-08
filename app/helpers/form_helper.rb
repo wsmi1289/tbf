@@ -1,9 +1,11 @@
 module FormHelper
-  def title_positions(position)
-    positions = Post.title_positions
+
+  def enum_options(object, attribute)
+    plural_sym = (attribute.to_s.pluralize).to_sym
+    enum = object.class.send(plural_sym)
     options_for_select(
-      positions.keys.map{ |p| [p.titleize, p] },
-      selected: [position.titleize, position]
-      )
+      enum.map {|k, v| [k.humanize.capitalize, k]},
+      selected: [ object[attribute].titleize, object[attribute] ]
+    )
   end
 end

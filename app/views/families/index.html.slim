@@ -1,0 +1,28 @@
+.row
+	.col-10
+		h1 Families
+	.col-2
+		= link_to 'New Family', new_family_path, class: 'btn btn-lg btn-light'
+table
+  thead
+    tr
+      th Name
+      th Nitrogen
+      th Biomass
+      th Weed Competition
+      th Erosion Control
+      th Root Structure
+      th colspan="3"
+      th colspan="3"
+  tbody
+    - @families.each do |family| 
+      tr
+        td = family.name
+        td = family.nitrogen.humanize
+        td = family.biomass.humanize
+        td = family.weed_competition.humanize
+        td = family.erosion.humanize
+        td = family.root_structure.humanize
+        td = link_to 'Edit', edit_family_path(family)
+        td = link_to 'Destroy', family, method: :delete, data: { confirm: 'Are you sure?' }
+

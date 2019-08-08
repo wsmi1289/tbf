@@ -1,0 +1,35 @@
+.mt-3
+  = form_for(@family) do |f|
+    - if @family.errors.any?
+      #error_explanation
+        h2 #{pluralize(@family.errors.count, "error")} prohibited this comment from being saved:
+
+        ul
+        - @family.errors.full_messages.each do |message|
+          li = message
+    .row
+      .col
+        .form-group
+          = f.label 'Name'
+          = f.text_field :name, placeholder: 'Name', class: 'form-control form-control-sm'
+      .col
+        .form-group
+          = f.label 'Nitrogen Use'
+          = f.select :nitrogen, enum_options(@family, :nitrogen), {}, class: 'form-control form-control-sm'
+      .col
+        .form-group
+          = f.label 'Biomass'
+          = f.select :biomass, enum_options(@family, :biomass), {}, class: 'form-control form-control-sm'
+    .row
+      .col
+        .form-group
+          = f.label 'Weed Competition'
+          = f.select :weed_competition, enum_options(@family, :weed_competition), {}, class: 'form-control form-control-sm'
+      .col
+        .form-group
+          = f.label 'Erosion Controll'
+          = f.select :erosion, enum_options(@family, :erosion), {}, class: 'form-control form-control-sm'
+      .col
+        .actions
+          br
+          = f.submit class: "btn btn-md btn-primary"
