@@ -2,13 +2,13 @@ class Field < ApplicationRecord
   has_many :plantings, dependent: :delete_all
   has_many :beds, through: :plantings
 
-  def planted_beds_scoped(plant, harvest)
-    plantings.inject(0) do |sum, planting|
-      if planting.transplanted_at.between?(plant, harvest) ||
-        planting.harvested_at.between?(plant, harvest)
-        sum + planting.num_beds.to_f
+  def current_planted_beds(plant, harvest)
+    plantings.inject(0) do |sum, p|
+      if ((p.transplanted_at > plant && p.transplanted_at < harvest) ||
+        (plant > p.transplanted_at && plant < p.harvested_at))
+        sum + p.num_beds.to_f
       else
-        sum + 0
+        sum
       end
     end
   end

@@ -1,5 +1,4 @@
 .mt-3
-  h3 = planting_name(planting)
   = form_for(planting) do |f|
     - if planting.errors.any?
       #error_explanation
@@ -8,7 +7,13 @@
         ul
         - planting.errors.full_messages.each do |message|
           li = message
-    = f.hidden_field :field_id, value: @field.id
+    .row
+      .col
+        h3 = planting_name(planting)
+      .col
+        .form-group
+          = f.collection_select :year_id, Year.all, :id, :current, prompt: 'Select Season', class: 'form-control form-control-sm'
+        = f.hidden_field :field_id, value: @field.id
     .row
       .col
         .form-group

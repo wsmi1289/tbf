@@ -1,0 +1,1 @@
+json.extract! @year, :id, :start, :end

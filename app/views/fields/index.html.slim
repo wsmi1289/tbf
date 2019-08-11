@@ -1,10 +1,13 @@
 .row
-	.col-6
+	.col-4
 		h1 Fields
 	.col-3
 		= link_to 'All Crops', crops_path, class: 'btn btn-lg btn-light'
 	.col-3
 		= link_to 'New Crop', new_crop_path, class: 'btn btn-lg btn-light'
+	.col-2.year-selector
+		= render 'misc/select', collection: Year.all, label: :current
+
 - @fields.each do |field|
 	= render 'fields/field', field: field
 = render 'form'
