@@ -2,6 +2,18 @@ class PlantingsController < ApplicationController
   include FieldHelper
   before_action :current_user_admin?
 
+  def index
+    @plantings = Planting.where(
+      year_id: params[:yr_id], field_id: params[:field_id])
+    respond_to do |format|
+      if @plantings
+        format.js
+      else
+        redirect_to fields_path, notice: 'Error'
+      end
+    end
+  end
+
   def create
     @planting = Planting.new(planting_params)
     if room_in_field? && @planting.save
@@ -25,6 +37,6 @@ class PlantingsController < ApplicationController
 
   def planting_params
     params.require(:planting).permit(:bed_width, :crop_id, :field_id,
-      :harvested_at, :num_beds, :seeded_at, :transplanted_at)
+      :harvested_at, :num_beds, :seeded_at, :transplanted_at, :year_id)
   end
 end

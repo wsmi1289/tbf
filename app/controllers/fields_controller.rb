@@ -1,7 +1,8 @@
 class FieldsController < ApplicationController
+  include FieldHelper
   include PlantingHelper
-  before_action :current_user_admin?
-  before_action :set_field, only: [:show, :edit, :update, :destroy]
+  # before_action :current_user_admin?
+  before_action :set_field, only: [:edit, :update, :destroy]
   
   def index
     @fields = Field.all

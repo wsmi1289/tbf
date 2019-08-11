@@ -4,18 +4,18 @@ var Slider = function (fieldId, plantedBeds, plantings) {
   this.plantedBeds = plantedBeds;
 };
 
-Slider.prototype.generateDates = function () {
+Slider.prototype.generateDates = function (response) {
   var today = new Date(),
-      day = today.getDate(),
-      month = today.getMonth(),
-      year = today.getFullYear(),
-      future = today.setFullYear(year, month+8, day),
-      past = today.setFullYear(year, month-2, day);
-  return { future: future, past: past };
+      startArray = response.start.split('-'),
+      endArray = response.end.split('-');
+  return {
+    future: today.setFullYear(endArray[0], endArray[1]-1, endArray[2]),
+    past: today.setFullYear(startArray[0], startArray[1]-1, startArray[2])
+  }
 };
 
-Slider.prototype.init = function () {
-  var dates = this.generateDates();
+Slider.prototype.init = function (yrData) {
+  var dates = this.generateDates(yrData);
   $('.slider-' + this.fieldId).slider({
     range: true,
     min: dates.past,
@@ -37,11 +37,11 @@ Slider.prototype.renderPlantings = function (ui) {
     var plantedAt = new Date(p.transplanted_at).getTime(),
         harvestedAt = new Date(p.harvested_at).getTime(),
         plantingEl = $('.planting-hover[data-planting="'+ p.id +'"]'),
-        hiddenBeds = $('#field-'+this.fieldId+' > .hidden > .bed').length;
+        count = $('#field-'+this.fieldId).find('.bed').not('.hidden .bed').length;
 
-    ((ui.values[0] <= harvestedAt) && (ui.values[1] >= plantedAt)) ?
+    dateUtils.anyOverlap(plantedAt, harvestedAt, ui.values) ?
       plantingEl.removeClass('hidden') : plantingEl.addClass('hidden');
-    $('.bed-count[data-id="'+this.fieldId+'"]').html(
-      Math.ceil(this.plantedBeds - hiddenBeds) + ' Beds');
+
+    $('.bed-count[data-id="'+this.fieldId+'"]').html(count + ' Beds');
   }.bind(this));
 };
