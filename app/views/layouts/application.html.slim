@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title Tbf
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body class="#{controller.controller_name}" 
+    = render 'layouts/header', controller: controller.controller_name
+    = render 'layouts/nav'
+    - if notice
+      #notice.alert.alert-info.center
+        button.close aria-label="Close" data-dismiss="alert" type="button" 
+          span aria-hidden="true"  ×
+        = notice
+    .container-fluid
+      .row
+        - if current_page?(products_path) && user_signed_in?
+          #side.col-md-3
+            = render @cart
+        div class=("col-md-9 col-center #{controller.action_name}") 
+          = yield
+    = render 'layouts/footer'

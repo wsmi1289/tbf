@@ -7,9 +7,16 @@ class ProductsController < ApplicationController
 
   def index
     svc = SearchService.new(Product, params, current_user.id)
-    @products = paginate(svc.search)    
+    @products = paginate(svc.search)
+    puts '#**************************#'
+    puts @products 
+    puts @products.empty?
     
     search_posts if @products.empty?
+    respond_to do |format|
+      format.html { render :index }
+      format.js
+    end
   end
 
   def new

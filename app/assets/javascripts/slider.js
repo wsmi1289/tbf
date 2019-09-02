@@ -22,9 +22,9 @@ Slider.prototype.init = function (yrData) {
     max: dates.future,
     values: [ dates.past, dates.future ],
     slide: function( event, ui ) {
-      $( '#date-' + this.fieldId ).find('label').html(
-        "Start: " + new Date(ui.values[0]).toDateString().substring(4) +
-        " - End: " + new Date(ui.values[1]).toDateString().substring(4)
+      $( '#date-' + this.fieldId ).find('.date-label span').html(
+        new Date(ui.values[0]).toDateString().substring(4) +
+        " - " + new Date(ui.values[1]).toDateString().substring(4)
       );
       this.renderPlantings(ui);
     }.bind(this),
