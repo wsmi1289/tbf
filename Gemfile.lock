@@ -154,7 +154,7 @@ GEM
       activesupport (>= 4.2)
     popper_js (1.14.5)
     public_suffix (3.1.0)
-    puma (3.12.1)
+    puma (3.12.2)
     rack (2.0.7)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -277,7 +277,7 @@ DEPENDENCIES
   mini_magick (~> 4.8)
   pg
   pg_search
-  puma (~> 3.11)
+  puma (~> 3.12)
   rails (~> 5.2.2)
   rails-assets-jcrop!
   sass-rails (~> 5.0)
