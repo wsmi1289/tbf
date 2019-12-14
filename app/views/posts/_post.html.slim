@@ -5,6 +5,7 @@
   .card-body
     p.card-text = truncate(strip_tags(post.body), length: 250)
 		a.btn.btn-link href=post_path(post.id) Read Full Post
+
 javascript:
 	$(function () {
 		var position = "#{post.title_position}";

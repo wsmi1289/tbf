@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :comments
+  has_many :weathers
   enum role: { root: 0, admin: 1, client: 2, user: 3 }
 
   # image upload

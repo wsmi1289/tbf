@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_08_044313) do
+ActiveRecord::Schema.define(version: 2019_12_14_151618) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,8 +159,28 @@ ActiveRecord::Schema.define(version: 2019_08_08_044313) do
     t.datetime "updated_at", null: false
     t.string "image"
     t.integer "role", default: 0, null: false
+    t.string "ag_api_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "weathers", force: :cascade do |t|
+    t.decimal "max_temp"
+    t.decimal "min_temp"
+    t.decimal "precipitation"
+    t.decimal "avg_wind_speed"
+    t.decimal "solar_radiation"
+    t.integer "dew_point"
+    t.decimal "max_soil_temp"
+    t.decimal "min_soil_temp"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.decimal "soil_surface_temp"
+    t.decimal "soil_10cm_temp"
+    t.decimal "soil_moisture"
+    t.date "measurement_date"
+    t.index ["user_id"], name: "index_weathers_on_user_id"
   end
 
   create_table "years", force: :cascade do |t|
@@ -176,4 +196,5 @@ ActiveRecord::Schema.define(version: 2019_08_08_044313) do
   add_foreign_key "plantings", "crops"
   add_foreign_key "plantings", "fields"
   add_foreign_key "plantings", "years"
+  add_foreign_key "weathers", "users"
 end

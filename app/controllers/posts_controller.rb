@@ -58,8 +58,10 @@ class PostsController < ApplicationController
     end
 
     def search_products
-      svc = SearchService.new(Product, params, current_user.id)
-      redirect_to products_path(params.permit(:q)) if svc.search.any?
+      if user_signed_in?
+        svc = SearchService.new(Product, params, user_client?)
+        redirect_to products_path(params.permit(:q)) if svc.search.any?
+      end
     end
 
     def set_post

@@ -8,10 +8,10 @@ module ApplicationHelper
   end
 
   def user_admin?
-    user_signed_in? && current_user.admin?
+    user_signed_in? && (current_user.admin? || current_user.root?)
   end
 
   def user_client?
-    user_signed_in? && current_user.client?
+    user_signed_in? && (current_user.client? || user_admin?)
   end
 end

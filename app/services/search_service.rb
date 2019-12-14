@@ -19,8 +19,6 @@ class SearchService
     end
 
     def filter_models
-      puts '**************************'
-      puts 'filtering'
       @models.where(category_id: @params[:filter][:category])
     end
 

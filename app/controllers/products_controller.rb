@@ -6,17 +6,10 @@ class ProductsController < ApplicationController
   before_action :current_user_client?
 
   def index
-    svc = SearchService.new(Product, params, current_user.id)
+    svc = SearchService.new(Product, params, user_client?)
     @products = paginate(svc.search)
-    puts '#**************************#'
-    puts @products 
-    puts @products.empty?
     
     search_posts if @products.empty?
-    respond_to do |format|
-      format.html { render :index }
-      format.js
-    end
   end
 
   def new
@@ -39,8 +32,6 @@ class ProductsController < ApplicationController
   def update
     if @product.update(product_params)
       handle_image_cropping
-      # product_params[:image].present? ?
-      #   render(:crop) : redirect_to(products_path, notice: 'Success.')
     else
       render :edit
     end
@@ -70,7 +61,7 @@ class ProductsController < ApplicationController
     end
 
     def search_posts
-      svc = SearchService.new(Post, params, current_user.id)
+      svc = SearchService.new(Post, params, user_client?)
       redirect_to posts_path(params.permit(:q)) if svc.search.any?
     end
 end
