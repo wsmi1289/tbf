@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_14_151618) do
+ActiveRecord::Schema.define(version: 2019_12_14_182717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -180,6 +180,7 @@ ActiveRecord::Schema.define(version: 2019_12_14_151618) do
     t.decimal "soil_10cm_temp"
     t.decimal "soil_moisture"
     t.date "measurement_date"
+    t.decimal "avg_temp"
     t.index ["user_id"], name: "index_weathers_on_user_id"
   end
 

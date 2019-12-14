@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :families
   resources :fields, except: [:new, :show]
   resources :plantings, only: [:index, :create, :update]
+  resources :weathers, only: [:index, :destroy]
   resources :years, only: [:show]
 
 
