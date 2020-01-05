@@ -35,7 +35,7 @@ Slider.prototype.init = function (yrData) {
 Slider.prototype.renderPlantings = function (ui) {
   _.each(this.plantings, function (p) {
     var plantedAt = new Date(p.transplanted_at).getTime(),
-        harvestedAt = new Date(p.harvested_at).getTime(),
+        harvestedAt = new Date(p.target_harvest_date).getTime(),
         plantingEl = $('.planting-hover[data-planting="'+ p.id +'"]'),
         count = $('#field-'+this.fieldId).find('.bed').not('.hidden .bed').length;
 

@@ -26,6 +26,16 @@ class Product < ApplicationRecord
 
   scope :in_stock, -> { where(in_stock: true) }
 
+  def add_to_inventory(harvest_id)
+    amount = inventory + Harvest.find(harvest_id).measurement
+    update(inventory: amount)
+  end
+
+  def remove_from_inventory(line_item_id)
+    amount = inventory - LineItem.find(line_item_id).quantity.to_d
+    update(inventory: amount)
+  end
+
   def crop_image
     image.recreate_versions! if crop_x.present?
   end

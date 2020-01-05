@@ -41,6 +41,6 @@
         .form-group
           = f.label 'Harvest Date'
           br
-          = f.date_select :harvested_at, selected: Date.today, class: 'form-control form-control-sm'
+          = f.date_select :target_harvest_date, selected: Date.today, class: 'form-control form-control-sm'
     .actions
       = f.submit class: "btn btn-sm btn-primary"

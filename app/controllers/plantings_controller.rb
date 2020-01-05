@@ -37,6 +37,6 @@ class PlantingsController < ApplicationController
 
   def planting_params
     params.require(:planting).permit(:bed_width, :crop_id, :field_id,
-      :harvested_at, :num_beds, :seeded_at, :transplanted_at, :year_id)
+      :target_harvest_date, :num_beds, :seeded_at, :transplanted_at, :year_id)
   end
 end

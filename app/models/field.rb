@@ -5,7 +5,7 @@ class Field < ApplicationRecord
   def current_planted_beds(plant, harvest)
     plantings.inject(0) do |sum, p|
       if ((p.transplanted_at > plant && p.transplanted_at < harvest) ||
-        (plant > p.transplanted_at && plant < p.harvested_at))
+        (plant > p.transplanted_at && plant < p.target_harvest_date))
         sum + p.num_beds.to_f
       else
         sum

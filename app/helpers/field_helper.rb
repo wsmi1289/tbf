@@ -1,7 +1,7 @@
 module FieldHelper
   def room_in_field?
     current_beds = @planting.field.current_planted_beds(
-      @planting.transplanted_at, @planting.harvested_at)
+      @planting.transplanted_at, @planting.target_harvest_date)
     @planting.field.num_beds > current_beds + @planting.num_beds.to_f
   end
 

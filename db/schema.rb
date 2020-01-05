@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_14_182717) do
+ActiveRecord::Schema.define(version: 2020_01_05_231144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,20 @@ ActiveRecord::Schema.define(version: 2019_12_14_182717) do
     t.integer "num_beds"
   end
 
+  create_table "harvests", force: :cascade do |t|
+    t.bigint "planting_id"
+    t.integer "area_unit"
+    t.decimal "area", precision: 5, scale: 2
+    t.integer "measurement_unit"
+    t.decimal "measurement", precision: 5, scale: 2
+    t.decimal "yield", precision: 5, scale: 2
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["planting_id"], name: "index_harvests_on_planting_id"
+    t.index ["product_id"], name: "index_harvests_on_product_id"
+  end
+
   create_table "line_items", force: :cascade do |t|
     t.bigint "product_id"
     t.datetime "created_at", null: false
@@ -101,7 +115,7 @@ ActiveRecord::Schema.define(version: 2019_12_14_182717) do
   create_table "plantings", force: :cascade do |t|
     t.date "seeded_at"
     t.date "transplanted_at"
-    t.date "harvested_at"
+    t.date "target_harvest_date"
     t.bigint "field_id"
     t.bigint "crop_id"
     t.decimal "num_beds", precision: 5, scale: 2
@@ -130,7 +144,10 @@ ActiveRecord::Schema.define(version: 2019_12_14_182717) do
     t.integer "category_id"
     t.boolean "in_stock", default: true
     t.string "image"
+    t.bigint "crop_id", null: false
+    t.decimal "inventory", precision: 5, scale: 2
     t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["crop_id"], name: "index_products_on_crop_id"
   end
 
   create_table "side_bar_contents", force: :cascade do |t|
@@ -193,9 +210,12 @@ ActiveRecord::Schema.define(version: 2019_12_14_182717) do
   add_foreign_key "beds", "fields"
   add_foreign_key "beds", "plantings"
   add_foreign_key "crops", "families"
+  add_foreign_key "harvests", "plantings"
+  add_foreign_key "harvests", "products"
   add_foreign_key "line_items", "products"
   add_foreign_key "plantings", "crops"
   add_foreign_key "plantings", "fields"
   add_foreign_key "plantings", "years"
+  add_foreign_key "products", "crops"
   add_foreign_key "weathers", "users"
 end

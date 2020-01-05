@@ -12,6 +12,9 @@ class ProductsController < ApplicationController
     search_posts if @products.empty?
   end
 
+  def show
+  end
+
   def new
     @product = Product.new
   end

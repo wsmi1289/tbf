@@ -5,10 +5,11 @@ class Planting < ApplicationRecord
   belongs_to :crop
   belongs_to :year
   has_many :beds, dependent: :delete_all
+  has_many :harvests
   
   scope :in_field, -> (start, finish) { 
     where(
-      "transplanted_at BETWEEN :start AND :finish OR harvested_at BETWEEN :start AND :finish", { start: start, finish: finish })
+      "transplanted_at BETWEEN :start AND :finish OR target_harvest_date BETWEEN :start AND :finish", { start: start, finish: finish })
   }
 
   scope :current, -> (currentYear) {
@@ -20,5 +21,11 @@ class Planting < ApplicationRecord
   private
     def update_beds
       BedCreationService.new(id).update
+    end
+
+    def harvest(amount, percent=false)
+      measurement = percent ?
+        amount.to_d : (num_beds * (amount * 0.01))
+      Harvest.create(planting_id: id, measurement: measurement)
     end
 end
