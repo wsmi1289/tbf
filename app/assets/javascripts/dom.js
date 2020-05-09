@@ -12,6 +12,7 @@ function ws(el) {
 };
 
 ws.prototype = {
+
 	on: function (event, callback) {
 		this.e.addEventListener(event, callback, false);
 	},

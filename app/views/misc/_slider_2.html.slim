@@ -1,0 +1,23 @@
+.slide style="width: #{field.length}px;"
+	div class="slider-#{field.id}"
+		.ui-slider-handle#left-handle
+		.ui-slider-handle#right-handle
+		.slider-line style="width: #{field.length}px;"
+	span id="date-#{field.id}"
+		h5.date-label.mt-3 for="date" Date range: <span class="small"></span>
+
+javascript:
+	$(function () {
+		var yearSelector = $('.year-selector').find('select'),
+				plantings = #{raw field.plantings.to_json},
+				slider = new Slider( #{field.id}, #{bed_count}, plantings );
+
+		$.get('/years/' + yearSelector.val(), slider.init.bind(slider));
+
+		yearSelector.on('change', function (e) {
+			$.get('/plantings',
+				{ yr_id: yearSelector.val(), field_id: #{field.id} });
+
+		  $.get('/years/' + yearSelector.val(), {}, slider.init.bind(slider));
+		})
+  });
