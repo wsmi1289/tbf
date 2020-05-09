@@ -3,8 +3,7 @@ class PlantingsController < ApplicationController
   before_action :current_user_admin?
 
   def index
-    @plantings = Planting.where(
-      year_id: params[:yr_id], field_id: params[:field_id])
+    @plantings = Planting.where(planting_params)
     respond_to do |format|
       if @plantings
         format.js

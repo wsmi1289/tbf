@@ -7,7 +7,7 @@ class Planting < ApplicationRecord
   has_many :beds, dependent: :delete_all
   has_many :harvests
   
-  scope :in_field, -> (start, finish) { 
+  scope :in_field, -> (start, finish) {
     where(
       "transplanted_at BETWEEN :start AND :finish OR target_harvest_date BETWEEN :start AND :finish", { start: start, finish: finish })
   }

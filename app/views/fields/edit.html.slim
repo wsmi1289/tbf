@@ -1,7 +1,9 @@
+- choice = Year.find_by(current: Time.now.year).id
+
 h1 Editing Field
 
 = render 'fields/form'
-
+= render 'misc/select', collection: Year.all, choice: choice, label: :current, klass: 'yr-select'
 - @field.plantings.each do |planting|
 	= render 'plantings/edit', planting: planting
 = render 'plantings/form', planting: Planting.new

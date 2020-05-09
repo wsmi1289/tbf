@@ -1,4 +1,4 @@
-select.form-control.form-control-lg
+select class="#{klass} form-control form-control-lg"
 	= collection.each do |x|
-		option value=x.id
+		option value=x.id selected="#{choice == x.id}"
 			= x[label]

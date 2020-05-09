@@ -1,3 +1,4 @@
+- choice = Year.find_by(current: Time.now.year).id
 .row
 	.col-4
 		h1 Fields
@@ -5,8 +6,8 @@
 		= link_to 'All Crops', crops_path, class: 'btn btn-lg btn-light'
 	.col-3
 		= link_to 'New Crop', new_crop_path, class: 'btn btn-lg btn-light'
-	.col-2.year-selector
-		= render 'misc/select', collection: Year.all, label: :current
+	.col-2
+		= render 'misc/select', collection: Year.all, choice: choice, label: :current, klass: 'yr-select'
 
 - @fields.each do |field|
 	= render 'fields/field', field: field

@@ -21,3 +21,8 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+//= require moment
+window['moment-range'].extendMoment(moment);
+function log (data) {
+	return console.log(data)
+}
