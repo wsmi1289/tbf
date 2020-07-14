@@ -22,7 +22,44 @@
 //= require turbolinks
 //= require_tree .
 //= require moment
+//= require vue
+//= require vue-slider
+
 window['moment-range'].extendMoment(moment);
+// window['vue-slider-component']
 function log (data) {
 	return console.log(data)
 }
+
+var data = {"data":[{"id":"1","type":"field","relationships":{"plantings":{"data":[{"id":"43","type":"planting"},{"id":"45","type":"planting"},{"id":"46","type":"planting"},{"id":"50","type":"planting"},{"id":"51","type":"planting"},{"id":"52","type":"planting"},{"id":"53","type":"planting"}]}}},{"id":"4","type":"field","relationships":{"plantings":{"data":[{"id":"47","type":"planting"},{"id":"48","type":"planting"},{"id":"49","type":"planting"},{"id":"54","type":"planting"}]}}}]}
+var multi = {"data": [{ "id":"1","type":"field","relationships": {
+        			"plantings": {
+        				"data": [{"id":"43","type":"planting"},{"id":"45","type":"planting"},{"id":"46","type":"planting"},{"id":"50","type":"planting"},{"id":"51","type":"planting"},{"id":"52","type":"planting"},{"id":"53","type":"planting"}]
+        			}
+        		}
+        	},
+        	{
+        		"id":"4","type":"field","relationships": {
+	        		"plantings": {
+		        		"data":[{"id":"47","type":"planting"},{"id":"48","type":"planting"},{"id":"49","type":"planting"},{"id":"54","type":"planting"}]
+	        		}
+        		}
+        	}
+        ]
+      }
+
+function unserialize(json) {
+	var final = {};
+	json['data'].forEach(function (obj) {
+		console.log(obj)
+		// var type = _.toString(obj['type']) + 's';
+		// final[type] = _.omit(obj, ['type', 'relationships']);
+		// if (obj['relationships']) {
+		// 	var key = _.toString(_.keys(obj['relationships'])[0]);
+		// 	final[type][key] = unserialize(obj['relationships'][key]);
+		// 	// console.log(obj['relationships'][key])
+		// }
+		// final[type][relationType] = obj['relationships'];
+	});
+	return final;
+};

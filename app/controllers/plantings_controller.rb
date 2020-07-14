@@ -6,7 +6,18 @@ class PlantingsController < ApplicationController
     @plantings = Planting.where(planting_params)
     respond_to do |format|
       if @plantings
-        format.js
+        format.json
+      else
+        redirect_to fields_path, notice: 'Error'
+      end
+    end
+  end
+
+  def show
+    @planting = Planting.find(params[:id])
+    respond_to do |format|
+      if @planting
+        format.json
       else
         redirect_to fields_path, notice: 'Error'
       end

@@ -1,13 +1,25 @@
-.row
-	.col.d-flex.justify-content-around
-		h3 = field.name
-		h6.text-muted.mt-2.bed-count data-id="#{field.id}"
-			| #{bed_count(field)} Beds
-	.col
-		= link_to 'Edit', edit_field_path(field), class: 'btn btn-lg btn-light'
-	.col
-		= link_to 'Delete', field, method: :delete, class: 'btn btn-lg btn-light', data: { confirm: "Are You Sure?" }
-.row
-	.col-md-12.mt-3
-		.field.mb-1 id="field-#{field.id}" style="height: #{field.width}px; width: #{field.length}px;"
-		= render 'misc/slider', field: field, bed_count: bed_count(field)
+script#field-template type="x-template"
+	.container
+		.row
+			.col.d-flex.justify-content-around
+				h3
+					| {{name}}
+				h6.text-muted.mt-2
+					| {{bedCount}} Beds
+			.col
+				a.btn.btn-lg.btn-light :href="editPath" Edit
+			.col
+				.btn.btn-lg.btn-light @click="destroyField" Destroy
+		.row
+			.col-md-12.mt-3
+				.field-container v-bind:style="styleObj"
+					.field.mb-1
+						planting v-for="p in plantings" v-bind:key="p.id" v-bind:planting="p" v-bind:field="field.table" v-bind:startDate="startDate" v-bind:endDate="endDate"
+					.slider
+						.form-group.float-left.mt-3
+							input.form-control v-model="dateRange[0]"
+							label start: {{formattedStartDate}}
+						.form-group.float-right.mt-3
+							input.form-control v-model="dateRange[1]"
+							label end: {{formattedEndDate}}
+						vue-slider v-model="dateRange" :enable-cross="false" :min="0" :max="730" :interval="1"

@@ -20,6 +20,6 @@ html
         - if current_page?(products_path) && user_signed_in?
           #side.col-md-3
             = render @cart
-        div class=("col-md-9 col-center #{controller.action_name}") 
+        div#app class=("col-md-9 col-center #{controller.action_name}") 
           = yield
     = render 'layouts/footer'

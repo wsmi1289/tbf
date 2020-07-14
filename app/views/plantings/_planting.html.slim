@@ -1,12 +1,3 @@
-- crop_class = planting_name(planting).downcase
-
-.planting-hover.mx-0 data-planting="#{planting.id}" data-toggle="tooltip" data-placement="top" data-html="true" title=render('plantings/tooltip', planting: planting)
-	- planting.num_beds.to_i.times.with_index do |b, i|
-			.bed class="#{crop_class}" 
-	- if bed_fraction(planting) != 0
-		.bed.partial class="#{crop_class}" style="width: #{bed_fraction(planting)}px;"
-
-javascript:
-	$(function () {
-		$('.planting-hover').tooltip()
-	});
+script#planting-template type="x-template"
+	.planting-hover.mx-0 v-show="displayed" @mouseover="toggleTooltip"
+		bed v-for="bed in beds" v-bind:key="bed.id" v-bind:bed="bed" :class="cropClass" v-bind:field="field"
