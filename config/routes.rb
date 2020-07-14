@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   
   resources :users, only: [:index, :show, :update]
   resources :admin, only: [:index, :update]
+  resources :beds, only: [:index]
   resources :categories, only: [:index, :create, :destroy]
   resources :comments, only: [:index, :new, :create, :destroy]
   resources :posts

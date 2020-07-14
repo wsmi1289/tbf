@@ -1,3 +1,3 @@
 script#planting-template type="x-template"
 	.planting-hover.mx-0 v-show="displayed" @mouseover="toggleTooltip"
-		bed v-for="bed in beds" v-bind:key="bed.id" v-bind:bed="bed" :class="cropClass" v-bind:field="field"
+		bed v-for="bed in beds" :key="bed.id" :bed="bed" :planting="planting" :class="cropClass"

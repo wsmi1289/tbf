@@ -1,3 +1,4 @@
 class BedSerializer < BaseSerializer
-  attributes :percent_used
+  attributes :id, :percent_used
+  belongs_to :planting
 end

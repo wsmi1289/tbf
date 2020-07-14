@@ -26,6 +26,7 @@ gem 'sidekiq'
 gem 'rb-readline'
 gem 'faraday'
 gem 'selenium-webdriver'
+gem 'active_model_serializers', '~> 0.10.0'
 # Easy installation and use of chromedriver to run system tests with Chrome
 gem 'chromedriver-helper'
 # Use Capistrano for deployment

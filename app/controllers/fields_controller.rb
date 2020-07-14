@@ -5,10 +5,11 @@ class FieldsController < ApplicationController
   before_action :set_field, only: [:edit, :update, :destroy]
   
   def index
-    # field_options = { include: [:plantings,'plantings.beds'] }
-    @fields = FieldSerializer.new(Field.all).serialize()
-    # @crops = CropSerializer.new(Crop.all).serialize()
+    @fields = serialize_collection(Field.all, { with: 'all' })
+    @crops = serialize_collection(Crop.all)
+
     @field = Field.new
+    
   end
 
   def edit

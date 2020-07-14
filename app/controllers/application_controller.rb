@@ -28,4 +28,10 @@ class ApplicationController < ActionController::Base
     def set_page
       @page = params[:page].to_i || 0
     end
+
+    private
+
+    def serialize_collection(collection, options = {})
+      ActiveModel::Serializer::CollectionSerializer.new(collection, options).as_json
+    end
 end

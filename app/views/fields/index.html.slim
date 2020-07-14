@@ -7,7 +7,7 @@
 		.col-3
 			= link_to 'New Crop', new_crop_path, class: 'btn btn-lg btn-light'
 		.col-2
-	field v-for="f in fields" v-bind:key="f.id" v-bind:field="f" v-bind:crops="crops"
+	field v-for="f in fields" :key="f.id" :field="f" :crops="crops"
 
 	= render 'form'
 	= render 'fields/field'
@@ -15,13 +15,15 @@
 	= render 'misc/bed'
 javascript:
   $(function () {
+		Vue.component('flat-pickr', VueFlatpickr);
 		initField();
 		initPlanting();
 		initBed();
     new Vue({
       el: '#fields',
       data: {
-        fields: #{raw @fields}
+      	crops: #{raw @crops.to_json},
+        fields: #{raw @fields.to_json}
       }
     });
   })

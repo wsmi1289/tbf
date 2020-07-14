@@ -3,9 +3,9 @@ script#field-template type="x-template"
 		.row
 			.col.d-flex.justify-content-around
 				h3
-					| {{name}}
+					| {{this.name}}
 				h6.text-muted.mt-2
-					| {{bedCount}} Beds
+					| {{this.bedCount}} Beds
 			.col
 				a.btn.btn-lg.btn-light :href="editPath" Edit
 			.col
@@ -14,12 +14,12 @@ script#field-template type="x-template"
 			.col-md-12.mt-3
 				.field-container v-bind:style="styleObj"
 					.field.mb-1
-						planting v-for="p in plantings" v-bind:key="p.id" v-bind:planting="p" v-bind:field="field.table" v-bind:startDate="startDate" v-bind:endDate="endDate"
+						planting v-for="p in this.plantings" :key="p.id" :planting="p" :startDate="startDate" :endDate="endDate"
 					.slider
 						.form-group.float-left.mt-3
-							input.form-control v-model="dateRange[0]"
-							label start: {{formattedStartDate}}
+							flat-pickr v-model="computedStart" :config="config"
+							label start: {{computedStart}}
 						.form-group.float-right.mt-3
-							input.form-control v-model="dateRange[1]"
-							label end: {{formattedEndDate}}
+							flat-pickr v-model="computedEnd" :config="config"
+							label end: {{computedEnd}}
 						vue-slider v-model="dateRange" :enable-cross="false" :min="0" :max="730" :interval="1"

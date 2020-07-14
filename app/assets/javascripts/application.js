@@ -22,11 +22,14 @@
 //= require turbolinks
 //= require_tree .
 //= require moment
+//= require flatpickr
 //= require vue
 //= require vue-slider
+//= require vue-flatpickr
 
 window['moment-range'].extendMoment(moment);
 // window['vue-slider-component']
+// Vue.component('flat-pickr', VueFlatpickr);
 function log (data) {
 	return console.log(data)
 }
