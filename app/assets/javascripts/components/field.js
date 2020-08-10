@@ -19,14 +19,12 @@ var initField = function () {
 				config:  {
 			    altFormat: 'M d, Y',
 			    altInput: true,
-			    dateFormat: 'M d, Y',//'Y-m-d',
+			    dateFormat: 'M d, Y',
 			    wrap: true
 			  },
 				dateRange: [365, 500],
-				end: null,
 				name: '',
 				plantings: [],
-				start: null,
 				styleObj: {
 					height: this.field.width + 'px',
 					width: this.field.length + 'px'
@@ -43,25 +41,13 @@ var initField = function () {
 	  computed: {
 	  	computedStart: {
 				get: function () {
-					console.log(this.startDate.format('MMM D, YYYY'))
 					return this.startDate.format('MMM D, YYYY');
 				},
         set: function (newVal) {
-        	console.log(newVal)
-        	console.log(this.startDate)
-        	var newDate = this.dateRange[0] - this.startDate.diff(newVal, 'days', true);
-        	console.log(newDate)
-        	Vue.set(this.dateRange, 0, Math.ceil(newDate));
+        	var newDate = Math.ceil(this.dateRange[0] - this.startDate.diff(newVal, 'days', true));
+        	Vue.set(this.dateRange, 0, newDate);
         }
 	  	},
-			//
-		  	// formattedStart: function () {
-		  	// 	return this.startDate.format('MMM D, YYYY');
-		  	// },
-
-		  	// formattedEnd: function () {
-		  	// 	return this.endDate.format('MMM D, YYYY');
-		  	// },
 
 	  	startDate: function () {
 	  		return moment().subtract(1, 'year').add(this.dateRange[0], 'days');
@@ -72,8 +58,8 @@ var initField = function () {
 					return this.endDate.format('MMM D, YYYY');
 				},
         set: function (newVal) {
-        	var newDate = this.dateRange[1] - this.endDate.diff(moment(newVal), 'days', true);
-        	Vue.set(this.dateRange, 1, Math.ceil(newDate));
+        	var newDate = Math.ceil(this.dateRange[1] - this.endDate.diff(newVal, 'days', true));
+        	Vue.set(this.dateRange, 1, newDate);
         }
 	  	},
 
@@ -91,10 +77,6 @@ var initField = function () {
 	  				method: "DELETE"
 	  			})
 	  		}
-	  	},
-
-	  	formatDate: function (moment) {
-	  		return moment.format('MMM D, YYYY');
 	  	}
 	  }
 	})

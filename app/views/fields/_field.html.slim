@@ -16,10 +16,16 @@ script#field-template type="x-template"
 					.field.mb-1
 						planting v-for="p in this.plantings" :key="p.id" :planting="p" :startDate="startDate" :endDate="endDate"
 					.slider
-						.form-group.float-left.mt-3
-							flat-pickr v-model="computedStart" :config="config"
-							label start: {{computedStart}}
-						.form-group.float-right.mt-3
-							flat-pickr v-model="computedEnd" :config="config"
-							label end: {{computedEnd}}
+						.form-group.float-left.mt-4
+							.input-group
+								flat-pickr v-model="computedStart" :config="config"
+								.input-group-append
+									button.btn.btn-light.border type="button" data-toggle="true"
+										span.fa.fa-calendar
+						.form-group.float-right.mt-4
+							.input-group
+								flat-pickr v-model="computedEnd" :config="config"
+								.input-group-append
+									button.btn.btn-light.border type="button" data-toggle="true"
+										span.fa.fa-calendar
 						vue-slider v-model="dateRange" :enable-cross="false" :min="0" :max="730" :interval="1"

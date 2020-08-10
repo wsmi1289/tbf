@@ -5,3 +5,8 @@
 	-o-background-size: 100% 100%;
 	background-size: 100% 100%;
 }
+
+.input-group > .form-control:not(:first-child), .input-group > .custom-select:not(:first-child) {
+	border-top-left-radius: 0.25rem;
+	border-bottom-left-radius: 0.25rem;
+}
