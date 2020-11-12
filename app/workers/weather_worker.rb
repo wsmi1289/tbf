@@ -17,8 +17,8 @@ class WeatherWorker
   end
 
 
-5dd1ac80ae8d9e0013fc2ba5
   def get_weather_data
+    # 5dd1ac80ae8d9e0013fc2ba5
     response = Faraday.get("https://api.openweathermap.org/data/2.5/weather",
       { appid: ENV['WEATHER_API'], zip: '08867,us', units: 'imperial' })
     

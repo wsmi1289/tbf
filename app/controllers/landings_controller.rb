@@ -4,6 +4,7 @@ class LandingsController < ApplicationController
   end
 
   def two_barn_farm
+    @pages = Page.all
   end
   private
 

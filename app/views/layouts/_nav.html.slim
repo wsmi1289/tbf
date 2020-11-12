@@ -8,7 +8,9 @@ nav.navbar.navbar-light.navbar-expand-md.mb-3.tan
 				= link_to 'The Flower Smith', flower_smith_url, class: 'nav-link'
 			li.nav-item
 				= link_to 'Blog', posts_path, class: 'nav-link'
-			- Page.all.each do |page|
+			li.nav-item
+				= @pages.first.name
+			- @pages.each do |page|
 				- if page.nav_link?
 					li.nav-item
 						a.nav-link href="/tbf/#{page.slug}"
@@ -17,7 +19,7 @@ nav.navbar.navbar-light.navbar-expand-md.mb-3.tan
 				a#navbarDropdown.nav-link.dropdown-toggle href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
 					| Menu
 		      	.dropdown-menu aria-labelledby="navbarDropdown"
-			        - Page.all.each do |page|
+			        - @pages.each do |page|
 								- if page.select_link?
 									a.dropdown-item href="/tbf/#{page.slug}" = page.name
 								.dropdown-divider
