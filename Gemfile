@@ -31,7 +31,6 @@ gem 'selenium-webdriver'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'mini_racer'
 gem 'chromedriver-helper'
-gem 'bootsnap', '>= 1.1.0', require: false
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
