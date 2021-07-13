@@ -6,7 +6,7 @@ ruby '2.4.1'
 
 gem 'rails', '~> 5.2.2'
 gem 'pg'
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 4.3'
 gem 'sassc-rails'
 gem 'sassc', '~> 2.1.0'
 gem 'uglifier', '>= 1.3.0'
